@@ -8,6 +8,8 @@
     --background-color: #292f36;
     --text-color: #ddd;
     --selected-text-color: #dfd;
+    --card_border-color: #dfd;
+    --card-hover-background-color: #080808
 }
 
 /**
@@ -105,6 +107,29 @@ a {
 }
 
 a:hover {
+    color: var(--selected-text-color);
+}
+
+.card {
+    background-color: var(--card-background-color);
+    color: var(--text-color);
+    border-color: var(--card_border-color);
+}
+
+.card:hover {
+    background-color: var(--card-hover-background-color);
+}
+
+/**
+ Articles Views
+ */
+
+.snippet_code {
+    border-radius: 1%;
+    width: 100%;
+}
+
+#article_title, #article_conclusion {
     color: var(--selected-text-color);
 }
 

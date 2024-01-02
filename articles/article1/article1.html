@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>Achraf Trabelsi</title>
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="../../index.html">Achraf Trabelsi</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../files/CV_Achraf_Trabelsi.pdf" download>Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../articles.html">Articles</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <main class="container" id="container">
+        <div class="d-flex flex-column">
+            <h1 id="article_title">Dismiss search programmatically in SwiftUI</h1>
+            <p class="text-justify">
+                In SwiftUI, integrating a search bar into the navigation bar is straightforward and user-friendly, thanks to the '.searchable()' modifier.
+                This modifier can be effortlessly added to any view. 
+                Not only does it enhance the user interface by providing quick and easy access to search functionality, but it also offers various customization options.
+                For instance, you can define parameters for filtering and displaying search results, and even customize the appearance of the search bar. 
+            </p>
+            <code>
+                <img src="resources/searchable.png" class="snippet_code" alt="searchable_code">    
+            </code>
+
+            <p class="text-justify">
+                Here's an example of how to implement it: 
+            </p>
+            <code>
+                <img src="resources/searchable_sample_code.png" class="snippet_code" alt="searchable_sample_code">
+            </code>
+            <p class="text-justify">
+                The example showcases a ContentView where the .searchable() modifier is applied directly to the NavigationStack.
+                The variable 'searchText' is a state variable that holds the current search query.
+                The '.searchable()' modifier binds this variable to the search bar, enabling dynamic search functionality. 
+                When a user types into the search bar, searchText is updated in real time.
+            </p>
+
+            <p class="text-justify">
+                The CountriesListView presents a list of countries, likely fetched from a data source or API. 
+            </p>
+            <code>
+                <img src="resources/countriesListView_code.png" class="snippet_code" alt="countriesListView_code">
+            </code>
+
+            <p class="text-justify">
+                But in this article, we're not going to talk about the searchable mechanism in SwiftUI.
+                Instead, I'll be focusing on a case I encountered when developing a feature in my project.
+                To cancel the search, it's intuitive to click on the cancel button that appears on the search bar when you start typing.
+                Imagine you have a scenario where you need to cancel the search and hide the keyboard without manually tapping the cancel button, but rather in an automatic way.
+                Well, in SwiftUI, this can be achieved by using the '@Environment(.dismissSearch)' variable.
+                By calling 'dismissSearch()' environment operator, we can cancel the search.
+            </p>
+            <code>
+                <img src="resources/dismiss_search_code.png" class="snippet_code" alt="dismiss_search_code">
+            </code>
+            <p class="text-justify">
+                This function provides an intuitive way for users to cancel their search operation.    
+                By simply invoking 'dismissSearch()', the search is cancelled, and the keyboard is automatically dismissed.
+                This not only streamlines the user experience but also caters to scenarios where an automatic dismissal of the search might be more contextually appropriate.       
+                This approach particularly shines in cases where the search functionality is part of a larger workflow.
+                For instance, in our CountriesListView, a user might be browsing through a list of countries for selection. 
+                Once the selection is made, it would be logical and more user-friendly to automatically dismiss the search, reducing the number of steps for the user. 
+            </p class="text-justify">
+
+            <h2 id="article_conclusion">Conclusion</h2>
+            <p>
+                In summary, SwiftUI's .dismissSearch offers a simple yet effective way to enhance user interactions within an app. 
+                It's a clear example of how SwiftUI empowers developers to create applications that are not only visually appealing but also intuitively interactive. 
+                This feature, though small, is a significant step towards making iOS apps more user-centric and efficient.
+            </p>
+        </div>
+    </main>
+    <!-- Main -->
+
+</body>
+
+</html>
