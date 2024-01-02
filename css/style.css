@@ -133,6 +133,15 @@ a:hover {
     color: var(--selected-text-color);
 }
 
+.important_topic {
+    position: relative;
+    padding: 10px 10px 10px 15px;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-left: 4px solid #ff644e;
+
+}
+
 /**
  Footer
  */
