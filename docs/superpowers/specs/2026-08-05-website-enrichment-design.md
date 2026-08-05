@@ -82,7 +82,7 @@ Same navbar/footer/theme as index; existing article card restyled. The article p
 
 ## Visual design
 
-- Dark elegant theme: deep dark background, slightly elevated cards with subtle borders, refined mint/green accent (evolution of current `#dfd`), modern typography (system font stack or a single webfont), generous spacing.
+- Dark elegant theme: deep dark background, slightly elevated cards with subtle borders, Swift orange accent `#F05138` (chosen at plan time to match the owner's CV branding), modern typography (system font stack or a single webfont), generous spacing.
 - Tag pills for tech, vertical timeline with markers, soft card hover, subtle scroll-reveal animation (CSS + a few lines of JS, no libraries).
 - Fully responsive (mobile-first breakpoints); mobile nav toggle without Bootstrap.
 
