@@ -490,6 +490,110 @@ img.app-icon {
 }
 
 /* ============================================================
+   Book feature (3D tilt)
+   ============================================================ */
+.book-feature {
+    display: flex;
+    align-items: center;
+    gap: 56px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 44px;
+}
+
+.book-stage {
+    perspective: 1000px;
+    flex-shrink: 0;
+    padding: 10px 26px 10px 6px;
+}
+
+.book {
+    position: relative;
+    width: 230px;
+    transform-style: preserve-3d;
+    transform: rotateY(-24deg) rotateX(4deg);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Gentle straighten + lift when hovering anywhere on the card */
+.book-feature:hover .book {
+    transform: rotateY(-9deg) rotateX(2deg) scale(1.05);
+}
+
+.book img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 3px 10px 10px 3px;
+    box-shadow: -24px 28px 44px rgba(0, 0, 0, 0.55);
+}
+
+/* Page block on the right edge */
+.book::after {
+    content: "";
+    position: absolute;
+    top: 1.5%;
+    right: -20px;
+    width: 20px;
+    height: 97%;
+    background: linear-gradient(90deg, #E8E4DA, #CFCabc 40%, #B9B4A6);
+    transform: rotateY(72deg) translateX(-5px);
+    transform-origin: left;
+    border-radius: 0 3px 3px 0;
+}
+
+.book-text {
+    min-width: 0;
+}
+
+.book-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+}
+
+.book-meta {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0 0 16px;
+}
+
+.book-text p {
+    color: var(--text-muted);
+    margin: 0 0 14px;
+}
+
+.book-text p strong {
+    color: var(--text);
+}
+
+@media (max-width: 760px) {
+    .book-feature {
+        flex-direction: column;
+        gap: 36px;
+        padding: 32px 24px;
+        text-align: left;
+    }
+
+    .book {
+        width: 180px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .book {
+        transition: none;
+    }
+
+    .book-feature:hover .book {
+        transform: rotateY(-24deg) rotateX(4deg);
+    }
+}
+
+/* ============================================================
    Skills
    ============================================================ */
 .skills-grid {
