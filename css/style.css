@@ -435,6 +435,34 @@ main {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
+img.app-icon {
+    object-fit: cover;
+    border: 1px solid var(--border);
+}
+
+.card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.store-link {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+    white-space: nowrap;
+}
+
+.store-link:hover {
+    text-decoration: none;
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
 .project-name {
     font-size: 1.1rem;
     font-weight: 700;
