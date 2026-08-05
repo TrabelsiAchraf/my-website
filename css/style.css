@@ -697,6 +697,15 @@ img.app-icon {
     background: var(--surface-hover);
 }
 
+.article-cover {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+}
+
 .article-title {
     font-size: 1.1rem;
     font-weight: 700;

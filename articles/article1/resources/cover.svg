@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" font-family="ui-monospace, 'SF Mono', Menlo, monospace">
+  <defs>
+    <linearGradient id="mint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34D399"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1D242C"/>
+      <stop offset="1" stop-color="#151B21"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="#171D23"/>
+  <circle cx="640" cy="90" r="220" fill="#22D3EE" opacity="0.05"/>
+  <circle cx="120" cy="400" r="180" fill="#34D399" opacity="0.05"/>
+
+  <!-- iPhone -->
+  <g transform="translate(96,60)">
+    <rect x="0" y="0" width="180" height="360" rx="28" fill="url(#fade)" stroke="#262E37" stroke-width="2"/>
+    <rect x="62" y="12" width="56" height="16" rx="8" fill="#0F1418"/>
+    <!-- Search bar -->
+    <rect x="14" y="44" width="152" height="30" rx="9" fill="#0F1418" stroke="#2BD3C4" stroke-width="1.5"/>
+    <circle cx="31" cy="59" r="6" fill="none" stroke="#2BD3C4" stroke-width="2"/>
+    <line x1="35.5" y1="63.5" x2="40" y2="68" stroke="#2BD3C4" stroke-width="2" stroke-linecap="round"/>
+    <text x="48" y="63" font-size="12" fill="#98A2AD">swiftui…</text>
+    <!-- Content rows -->
+    <rect x="14" y="88" width="152" height="14" rx="4" fill="#232B33"/>
+    <rect x="14" y="110" width="118" height="14" rx="4" fill="#232B33"/>
+    <rect x="14" y="132" width="136" height="14" rx="4" fill="#232B33"/>
+    <!-- Keyboard sliding away -->
+    <g opacity="0.85" transform="translate(0,14)">
+      <rect x="10" y="238" width="160" height="96" rx="10" fill="#1D242C" stroke="#262E37"/>
+      <g fill="#2A323B">
+        <rect x="20" y="248" width="20" height="14" rx="3"/><rect x="46" y="248" width="20" height="14" rx="3"/><rect x="72" y="248" width="20" height="14" rx="3"/><rect x="98" y="248" width="20" height="14" rx="3"/><rect x="124" y="248" width="20" height="14" rx="3"/><rect x="150" y="248" width="10" height="14" rx="3"/>
+        <rect x="26" y="268" width="20" height="14" rx="3"/><rect x="52" y="268" width="20" height="14" rx="3"/><rect x="78" y="268" width="20" height="14" rx="3"/><rect x="104" y="268" width="20" height="14" rx="3"/><rect x="130" y="268" width="20" height="14" rx="3"/>
+        <rect x="36" y="288" width="108" height="14" rx="3"/>
+      </g>
+    </g>
+    <!-- Dismiss arrow -->
+    <g stroke="url(#mint)" stroke-width="5" stroke-linecap="round" fill="none">
+      <path d="M 90 200 L 90 232"/>
+      <path d="M 76 220 L 90 234 L 104 220"/>
+    </g>
+  </g>
+
+  <!-- Code panel -->
+  <g transform="translate(340,120)">
+    <rect x="0" y="0" width="384" height="210" rx="14" fill="#0F1418" stroke="#262E37" stroke-width="2"/>
+    <circle cx="24" cy="24" r="5" fill="#FF5F57"/>
+    <circle cx="42" cy="24" r="5" fill="#FEBC2E"/>
+    <circle cx="60" cy="24" r="5" fill="#28C840"/>
+    <text x="24" y="66" font-size="16" fill="#98A2AD">@Environment(\.dismissSearch)</text>
+    <text x="24" y="92" font-size="16" fill="#E8EAED">private var dismissSearch</text>
+    <text x="24" y="130" font-size="16" fill="#98A2AD">Button("Done") {</text>
+    <text x="44" y="156" font-size="16" fill="#2BD3C4">dismissSearch()</text>
+    <text x="24" y="182" font-size="16" fill="#98A2AD">}</text>
+  </g>
+
+  <!-- Caption -->
+  <text x="340" y="360" font-size="20" fill="#E8EAED" font-weight="bold">Dismiss search programmatically</text>
+  <text x="340" y="386" font-size="16" fill="url(#mint)">// swiftui · ios 15+</text>
+</svg>
