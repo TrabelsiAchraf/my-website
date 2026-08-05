@@ -387,7 +387,7 @@ main {
    ============================================================ */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(310px, 100%), 1fr));
     gap: 20px;
 }
 
@@ -453,7 +453,7 @@ main {
    ============================================================ */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(310px, 100%), 1fr));
     gap: 20px;
 }
 
@@ -527,7 +527,7 @@ main {
    ============================================================ */
 .articles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(310px, 100%), 1fr));
     gap: 20px;
     padding-bottom: 40px;
 }
@@ -590,6 +590,14 @@ main {
     .article-card {
         transition: none;
     }
+}
+
+/* ============================================================
+   Accessibility
+   ============================================================ */
+a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 /* ============================================================
