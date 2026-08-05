@@ -82,7 +82,7 @@ Same navbar/footer/theme as index; existing article card restyled. The article p
 
 ## Visual design
 
-- Dark elegant theme: deep dark background, slightly elevated cards with subtle borders, Swift orange accent `#F05138` (chosen at plan time to match the owner's CV branding), modern typography (system font stack or a single webfont), generous spacing.
+- Dark elegant theme: deep dark background, slightly elevated cards with subtle borders, "Neo mint" gradient accent `linear-gradient(135deg, #34D399, #22D3EE)` with solid mid-tone `#2BD3C4` for small elements (chosen by Achraf on 2026-08-05, replacing the initial Swift orange; nods to the site's original green identity), modern typography (system font stack or a single webfont), generous spacing.
 - Tag pills for tech, vertical timeline with markers, soft card hover, subtle scroll-reveal animation (CSS + a few lines of JS, no libraries).
 - Fully responsive (mobile-first breakpoints); mobile nav toggle without Bootstrap.
 

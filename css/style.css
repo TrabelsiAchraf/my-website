@@ -8,8 +8,9 @@
     --border: #262E37;
     --text: #E8EAED;
     --text-muted: #98A2AD;
-    --accent: #F05138;
-    --accent-soft: rgba(240, 81, 56, 0.12);
+    --accent: #2BD3C4;
+    --accent-soft: rgba(43, 211, 196, 0.12);
+    --accent-grad: linear-gradient(135deg, #34D399, #22D3EE);
     --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
     --maxw: 1080px;
@@ -151,7 +152,10 @@ main {
 .eyebrow {
     font-family: var(--mono);
     font-size: 0.85rem;
-    color: var(--accent);
+    background: var(--accent-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     letter-spacing: 0.02em;
     margin: 0 0 12px;
 }
@@ -219,9 +223,9 @@ main {
 }
 
 .btn-primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
+    background: var(--accent-grad);
+    border-color: transparent;
+    color: #0B1416;
 }
 
 .btn-primary:hover {
@@ -262,7 +266,10 @@ main {
     font-family: var(--mono);
     font-size: 1.6rem;
     font-weight: 700;
-    color: var(--accent);
+    background: var(--accent-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .stat-label {
@@ -308,13 +315,12 @@ main {
 .timeline-item::before {
     content: "";
     position: absolute;
-    left: -6px;
+    left: -7px;
     top: 8px;
-    width: 11px;
-    height: 11px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
-    background: var(--bg);
-    border: 2px solid var(--accent);
+    background: var(--accent-grad);
 }
 
 .timeline-role {
@@ -465,8 +471,11 @@ main {
 }
 
 .skill-group-featured {
-    border-color: var(--accent);
-    background: linear-gradient(180deg, var(--accent-soft), var(--surface) 60%);
+    border: 1px solid transparent;
+    background:
+        linear-gradient(180deg, var(--accent-soft), var(--surface) 60%) padding-box,
+        linear-gradient(var(--surface), var(--surface)) padding-box,
+        var(--accent-grad) border-box;
     grid-column: 1 / -1;
 }
 
