@@ -3,66 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Articles — Achraf Trabelsi</title>
+    <meta name="description" content="Articles on Swift, SwiftUI and iOS development by Achraf Trabelsi.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <link rel="stylesheet" href="css/style.css">
-    <title>Achraf Trabelsi</title>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="index.html">Achraf Trabelsi</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo01">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="files/CV_Achraf_Trabelsi.pdf" download>Resume</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="articles.html">Articles</a>
-                </li>
+    <nav class="site-nav" id="siteNav">
+        <div class="nav-inner">
+            <a class="nav-brand" href="index.html">Achraf Trabelsi</a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a class="nav-cta" href="files/CV_Achraf_Trabelsi_Resume_EN.pdf" download>Resume ↓</a></li>
+                <li><a class="nav-cta" href="files/CV_Achraf_Trabelsi_Complete_EN.pdf" download>Full CV ↓</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Main -->
-    <main class="container" id="container">
-        <div class="d-flex flex-column">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Dismiss search programmatically in SwiftUI</h5>
-                    <p class="card-text">02 Jan 2024</p>
-                </div>
-                <a href="articles/article1/article1.html" class="btn stretched-link"></a>
+    <main>
+        <section class="section">
+            <p class="eyebrow">// articles</p>
+            <h2 class="section-title">Writing about iOS &amp; Swift</h2>
+            <div class="articles-grid">
+                <a class="article-card" href="articles/article1/article1.html">
+                    <div class="article-title">Dismiss search programmatically in SwiftUI</div>
+                    <div class="article-date">02 jan 2024</div>
+                </a>
             </div>
-        </div>
+        </section>
     </main>
-    <!-- Main -->
 
-    <!-- Footer -->
-    <footer class="text-center text-white p-3">
-        Achraf Trabelsi © <span id="year"></span>. All rights reserved.
+    <footer class="site-footer" id="contact">
+        <h2 class="footer-title">Get in touch</h2>
+        <p>Happy to chat about iOS, AI-assisted development and tech leadership.</p>
+        <div class="footer-links">
+            <a href="mailto:trabelsiachraf.mobile@gmail.com">trabelsiachraf.mobile@gmail.com</a>
+            <a href="https://github.com/TrabelsiAchraf" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/achraf-trabelsi-83148156/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://twitter.com/Tr_Achraf" target="_blank" rel="noopener">Twitter</a>
+        </div>
+        <p class="footer-copy">Achraf Trabelsi © <span id="year"></span> · Paris, France</p>
     </footer>
-    <!-- Footer -->
 
-    <!-- JavaScript -->
     <script src="js/index.js"></script>
-
-    <!-- Popper.js first, then Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
-
 </body>
 
 </html>
