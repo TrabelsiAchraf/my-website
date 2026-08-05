@@ -270,6 +270,13 @@ main {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    white-space: nowrap;
+}
+
+/* Textual stat values (client names) fit on one line at a smaller size */
+.stat-value-text {
+    font-size: 1.15rem;
+    line-height: 2.2;
 }
 
 .stat-label {
@@ -615,6 +622,12 @@ a:focus-visible, button:focus-visible {
 @media (max-width: 900px) {
     .stats {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .stats {
+        grid-template-columns: 1fr;
     }
 }
 
