@@ -3,77 +3,414 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Achraf Trabelski — iOS Tech Lead</title>
+    <meta name="description"
+        content="iOS Tech Lead in Paris. 10 years shipping business-critical iOS apps for ENGIE, Société Générale and Oodrive's top customers. Swift 6, SwiftUI, Clean Architecture, AI-native engineering with Claude Code.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Achraf Trabelski — iOS Tech Lead">
+    <meta property="og:description"
+        content="10 years shipping business-critical iOS apps. Swift 6 · SwiftUI · Clean Architecture · AI-native engineering.">
+    <meta property="og:image" content="https://trabelsiachraf.github.io/my-website/assets/avatar.png">
+    <meta property="og:url" content="https://trabelsiachraf.github.io/my-website/">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <link rel="stylesheet" href="css/style.css">
-    <title>Achraf Trabelsi</title>
 </head>
 
 <body>
 
-    <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="index.html">Achraf Trabelsi</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo01">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="files/CV_Achraf_Trabelsi.pdf" download>Resume</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="articles.html">Articles</a>
-                </li>
+    <nav class="site-nav" id="siteNav">
+        <div class="nav-inner">
+            <a class="nav-brand" href="index.html">Achraf Trabelski</a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a class="nav-cta" href="files/CV_Achraf_Trabelski_Resume_EN.pdf" download>Resume ↓</a></li>
+                <li><a class="nav-cta" href="files/CV_Achraf_Trabelski_Complete_EN.pdf" download>Full CV ↓</a></li>
             </ul>
         </div>
     </nav>
-    <!-- NavBar -->
 
-    <!-- Main -->
-    <main class="container" id="container">
-        <div class="d-flex flex-column">
-            <h1 id="hiThere">Hi there!</h1>
-            <img src="assets/avatar.png" id="avatar" class="rounded-circle" alt="avatar">
-            <h2>My name is <span style='color: #dfd;'>Achraf</span>.</h2>
-            <p class="text-justify">
-                I'm <span style='color: #dfd;'>iOS</span> developer 👨🏻‍💻 I love anything relating to computers,
-                programming and Tech in general.
-                I’m on the pulse of the latest technology news.
-                I am constantly scouring the Internet for the latest iOS news, apps, games, tips, tutorials, mobile
-                devices
-                and Apple Services.
-            </p>
-            <p class="text-justify">Feel free to follow me on
-                <a href="https://twitter.com/Tr_Achraf" target="_blank"><strong>Twitter</strong></a>,
-                <a href="https://github.com/TrabelsiAchraf" target="_blank"><strong>Github</strong></a> and
-                <a href="https://www.linkedin.com/in/achraf-trabelsi-83148156/"
-                    target="_blank"><strong>Linkedin</strong></a>.
-            </p>
-        </div>
+    <main>
+
+        <!-- Hero -->
+        <section class="hero" id="about">
+            <div class="hero-text">
+                <p class="eyebrow">// ios tech lead — paris, france</p>
+                <h1 class="hero-title">I design, build and ship business-critical iOS apps.</h1>
+                <p class="hero-lede">
+                    Hi, I'm <strong>Achraf Trabelski</strong>. For 10 years I've shipped iOS apps for
+                    <strong>ENGIE</strong>, <strong>Société Générale</strong> and Oodrive's top customers —
+                    LVMH, Crédit Agricole, BNP, the Paris Bar Association.
+                </p>
+                <p class="hero-lede">
+                    Swift 6 · SwiftUI · Clean Architecture · modular SPM · Design Systems · CI/CD.
+                    <strong>AI-native engineer</strong>: Claude Code is my daily driver, and I built my
+                    team's AI workflow at Oodrive.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="files/CV_Achraf_Trabelski_Resume_EN.pdf" download>Download resume</a>
+                    <a class="btn btn-ghost" href="files/CV_Achraf_Trabelski_Complete_EN.pdf" download>Full CV</a>
+                    <a class="btn btn-ghost" href="https://github.com/TrabelsiAchraf" target="_blank" rel="noopener">GitHub</a>
+                    <a class="btn btn-ghost" href="https://www.linkedin.com/in/achraf-trabelski-83148156/" target="_blank"
+                        rel="noopener">LinkedIn</a>
+                </div>
+            </div>
+            <img src="assets/avatar.png" alt="Achraf Trabelski's avatar" class="hero-avatar">
+        </section>
+
+        <!-- Highlights -->
+        <section class="section reveal" id="highlights">
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">10+</div>
+                    <div class="stat-label">years of iOS</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">20+</div>
+                    <div class="stat-label">apps shipped to production</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">2024</div>
+                    <div class="stat-label">Tech Lead since</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">F500</div>
+                    <div class="stat-label">Fortune-500 clients</div>
+                </div>
+            </div>
+            <div class="badges">
+                <span class="badge"><strong>Technical Reviewer @ Packt</strong> — "AI Driven Swift Architecture"</span>
+                <span class="badge"><strong>Microsoft Imagine Cup 2015</strong> — Winner (Games) · Finalist (Innovation)</span>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="section" id="experience">
+            <p class="eyebrow">// experience</p>
+            <h2 class="section-title">Where I've worked</h2>
+            <ul class="timeline">
+
+                <li class="timeline-item reveal">
+                    <h3 class="timeline-role">iOS Tech Lead · Senior iOS Developer — Oodrive</h3>
+                    <p class="timeline-meta">oct 2022 → present · paris · tech lead since dec 2024</p>
+                    <ul class="timeline-body">
+                        <li>Lead iOS on <strong>Work</strong>, Oodrive's secure document management app:
+                            MVVM + Clean Architecture, 6 SPM modules, 5 internal libraries.</li>
+                        <li>Built the centralized <strong>Design System tokens</strong> and cross-apps logger powering
+                            the whole Oodrive suite.</li>
+                        <li>Established the team's <strong>AI workflow</strong>: project CLAUDE.md, 3 MCP servers,
+                            4 custom Claude Skills, auto-lint hook.</li>
+                        <li>Industrialized CI/CD: GitLab → Fastlane → SonarQube → Firebase, with Swift Testing + XCTest.</li>
+                        <li>Also shipped on <strong>Oodrive OTP</strong>, <strong>Meet</strong> and <strong>Share</strong>.</li>
+                    </ul>
+                    <div class="tags">
+                        <span class="tag">Swift 6</span><span class="tag">SwiftUI</span><span class="tag">SPM</span>
+                        <span class="tag">Swinject</span><span class="tag">GRDB · SQLCipher</span>
+                        <span class="tag">Claude Code · MCP</span>
+                    </div>
+                </li>
+
+                <li class="timeline-item reveal">
+                    <h3 class="timeline-role">Technical Reviewer — Packt <small>(side project)</small></h3>
+                    <p class="timeline-meta">aug 2025 → apr 2026 · remote</p>
+                    <ul class="timeline-body">
+                        <li>Technical review of the book <strong>"AI Driven Swift Architecture"</strong>: Swift code
+                            validation, architecture decisions review, pedagogical feedback.</li>
+                    </ul>
+                    <div class="tags">
+                        <span class="tag">Swift</span><span class="tag">Clean Architecture</span><span class="tag">AI</span>
+                    </div>
+                </li>
+
+                <li class="timeline-item reveal">
+                    <h3 class="timeline-role">Senior iOS Developer · iOS Developer — Niji (ENGIE)</h3>
+                    <p class="timeline-meta">dec 2018 → sep 2022 · paris / bagneux</p>
+                    <ul class="timeline-body">
+                        <li>ERL squad: onboarding flow for the <strong>ENGIE ERL key</strong>, Netatmo SDK integration,
+                            real-time SSE streaming of consumption data.</li>
+                        <li>Built an in-app rating system that raised the App Store rating
+                            from <strong>3.2 to 3.9</strong>.</li>
+                        <li>Led a major UI redesign; replaced the chart library with a custom one built on
+                            native Apple APIs.</li>
+                        <li>Beta rollouts, stakeholder feedback, Kibana monitoring — SAFe at scale.</li>
+                    </ul>
+                    <div class="tags">
+                        <span class="tag">Swift</span><span class="tag">RxSwift</span><span class="tag">Combine</span>
+                        <span class="tag">SSE</span><span class="tag">SAFe</span>
+                    </div>
+                </li>
+
+                <li class="timeline-item reveal">
+                    <h3 class="timeline-role">iOS Developer — OLBATI</h3>
+                    <p class="timeline-meta">aug 2018 → dec 2018 · paris</p>
+                    <ul class="timeline-body">
+                        <li>iOS development.</li>
+                    </ul>
+                </li>
+
+                <li class="timeline-item reveal">
+                    <h3 class="timeline-role">iOS Developer — Easy Mountain</h3>
+                    <p class="timeline-meta">aug 2017 → aug 2018 · paris</p>
+                    <ul class="timeline-body">
+                        <li><strong>Mhikes</strong>: designed the MPMhikesPresentation and MPMhikesNavigation
+                            frameworks (trail display, navigation, POIs).</li>
+                        <li><strong>Who's Up</strong>: built the app from scratch plus the MPInstant framework
+                            (events, chat, push notifications).</li>
+                        <li>Swift 4 migrations, private CocoaPods, customer support on the frameworks.</li>
+                    </ul>
+                    <div class="tags">
+                        <span class="tag">Swift 4</span><span class="tag">RxSwift</span><span class="tag">CocoaPods</span>
+                    </div>
+                </li>
+
+                <li class="timeline-item reveal">
+                    <h3 class="timeline-role">iOS Developer — Société Générale</h3>
+                    <p class="timeline-meta">jan 2017 → aug 2017 · paris</p>
+                    <ul class="timeline-body">
+                        <li><strong>SogeSmart</strong> (SG New Caledonia): transfers, PDF statements,
+                            real-time branch affluence.</li>
+                    </ul>
+                    <div class="tags">
+                        <span class="tag">Objective-C</span><span class="tag">Motwin SDK</span>
+                    </div>
+                </li>
+
+                <li class="timeline-item reveal">
+                    <h3 class="timeline-role">iOS Developer — Mobile Powered</h3>
+                    <p class="timeline-meta">2016 · tunis</p>
+                    <ul class="timeline-body">
+                        <li>Shipped <strong>Crédit Agricole Germany</strong> (loan requests),
+                            <strong>MyInovallée</strong> (events, QR tickets) and <strong>Galerie Photo</strong>
+                            (Instagram-like app + Node.js/Express back-end).</li>
+                    </ul>
+                    <div class="tags">
+                        <span class="tag">Swift</span><span class="tag">Objective-C</span><span class="tag">Node.js</span>
+                    </div>
+                </li>
+
+            </ul>
+        </section>
+
+        <!-- Projects -->
+        <section class="section" id="projects">
+            <p class="eyebrow">// projects & apps</p>
+            <h2 class="section-title">Apps I've shipped</h2>
+            <div class="projects-grid">
+
+                <article class="project-card reveal">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #2F6BFF, #133A9E);">Wk</div>
+                    <h3 class="project-name">Work <small>Oodrive · 2022 → today</small></h3>
+                    <p class="project-desc">Secure enterprise document management for <strong>LVMH, Crédit Agricole,
+                            BNP and the Paris Bar Association</strong>. 6 SPM modules + 5 internal libraries,
+                        PDFTron viewer, SwiftUI media viewer, biometrics, real-time chat, encrypted offline
+                        mode (GRDB + SQLCipher).</p>
+                    <div class="tags">
+                        <span class="tag">Swift 6</span><span class="tag">SwiftUI</span><span class="tag">SPM</span>
+                        <span class="tag">PDFTron</span><span class="tag">SQLCipher</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #34C759, #147038);">OT</div>
+                    <h3 class="project-name">Oodrive OTP <small>Oodrive</small></h3>
+                    <p class="project-desc">TOTP code generator, fully <strong>RFC 6238-compliant</strong> —
+                        Oodrive's answer to Google Authenticator. Clock-synced TOTP engine, encrypted secret keys,
+                        Keychain storage, haptic feedback.</p>
+                    <div class="tags">
+                        <span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">Keychain</span>
+                        <span class="tag">CryptoKit</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #AF52DE, #5E2380);">Me</div>
+                    <h3 class="project-name">Oodrive Meet <small>Oodrive</small></h3>
+                    <p class="project-desc">Digital governance meetings: invitations, <strong>votes</strong> and
+                        minutes in a highly secure environment. Recurring meetings, full CocoaPods → SPM migration,
+                        white-label builds via an in-house Docker tool.</p>
+                    <div class="tags">
+                        <span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">SPM</span>
+                        <span class="tag">Docker</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #30B0C7, #14636F);">Sh</div>
+                    <h3 class="project-name">Oodrive Share <small>Oodrive</small></h3>
+                    <p class="project-desc">Secure sharing of sensitive business documents. Delivered the
+                        <strong>Public Groups</strong> feature, fixed a major memory issue affecting multiple
+                        customers, shipped LVMH / Crédit Agricole / BNP white-labels.</p>
+                    <div class="tags">
+                        <span class="tag">Swift</span><span class="tag">Objective-C</span><span class="tag">Combine</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #00AAFF, #0055A5);">En</div>
+                    <h3 class="project-name">ENGIE Particulier <small>Niji / ENGIE · 2018 → 2022</small></h3>
+                    <p class="project-desc">ENGIE's consumer app: energy tracking, invoices, meter readings and
+                        ERL key installation. Netatmo SDK, real-time SSE streaming, in-app rating system
+                        (<strong>3.2 → 3.9</strong> on the App Store), custom charts on native Apple APIs.</p>
+                    <div class="tags">
+                        <span class="tag">Swift</span><span class="tag">RxSwift</span><span class="tag">SSE</span>
+                        <span class="tag">Bluetooth</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #63B34F, #2C6321);">Mh</div>
+                    <h3 class="project-name">Mhikes <small>Easy Mountain</small></h3>
+                    <p class="project-desc">Geo-located hiking companion: trail downloads, guidance and points of
+                        interest. Designed the <strong>MPMhikesPresentation</strong> and
+                        <strong>MPMhikesNavigation</strong> frameworks, migrated everything to Swift 4.</p>
+                    <div class="tags">
+                        <span class="tag">Swift</span><span class="tag">RxSwift</span><span class="tag">Google Maps</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #FF9F0A, #A85E00);">WU</div>
+                    <h3 class="project-name">Who's Up <small>Easy Mountain</small></h3>
+                    <p class="project-desc">Geo-located social network for creating events with like-minded friends.
+                        <strong>Built from scratch</strong>, including the MPInstant framework: events, chat,
+                        push notifications.</p>
+                    <div class="tags">
+                        <span class="tag">Swift</span><span class="tag">Realm</span><span class="tag">Push</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #E9041E, #7A0210);">Sg</div>
+                    <h3 class="project-name">SogeSmart <small>Société Générale</small></h3>
+                    <p class="project-desc">Banking app for Société Générale New Caledonia: account management,
+                        <strong>transfers</strong>, PDF statement view &amp; download, real-time branch
+                        affluence.</p>
+                    <div class="tags">
+                        <span class="tag">Objective-C</span><span class="tag">Motwin SDK</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #8E8E93, #48484A);">MP</div>
+                    <h3 class="project-name">Mobile Powered apps <small>2016</small></h3>
+                    <p class="project-desc">Three apps in one year: <strong>Crédit Agricole Germany</strong> (loans),
+                        <strong>MyInovallée</strong> (events, QR-code tickets) and <strong>Galerie Photo</strong> —
+                        an internal Instagram-like app built end-to-end, including its Node.js/Express back-end
+                        and SceneKit 3D display.</p>
+                    <div class="tags">
+                        <span class="tag">Swift</span><span class="tag">Objective-C</span><span class="tag">Node.js</span>
+                        <span class="tag">SceneKit</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="section" id="skills">
+            <p class="eyebrow">// skills</p>
+            <h2 class="section-title">What I work with</h2>
+            <div class="skills-grid">
+
+                <div class="skill-group skill-group-featured reveal">
+                    <h3 class="skill-group-title"><span class="eyebrow">// the differentiator</span>AI &amp; Dev Tooling</h3>
+                    <ul class="pills">
+                        <li class="pill">Claude Code (daily driver)</li>
+                        <li class="pill">Custom MCP servers</li>
+                        <li class="pill">Custom Claude Skills</li>
+                        <li class="pill">Auto-lint hooks</li>
+                        <li class="pill">AI pair-programming</li>
+                        <li class="pill">cmux</li>
+                        <li class="pill">iTerm2</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group reveal">
+                    <h3 class="skill-group-title">Languages &amp; SDKs</h3>
+                    <ul class="pills">
+                        <li class="pill">Swift 6</li>
+                        <li class="pill">Objective-C</li>
+                        <li class="pill">SwiftUI</li>
+                        <li class="pill">UIKit</li>
+                        <li class="pill">Combine</li>
+                        <li class="pill">Async/Await</li>
+                        <li class="pill">RxSwift</li>
+                        <li class="pill">CryptoKit</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group reveal">
+                    <h3 class="skill-group-title">Architecture</h3>
+                    <ul class="pills">
+                        <li class="pill">MVVM</li>
+                        <li class="pill">Clean Architecture</li>
+                        <li class="pill">Modular SPM · micro-apps</li>
+                        <li class="pill">Coordinator</li>
+                        <li class="pill">DI (Swinject)</li>
+                        <li class="pill">SOLID</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group reveal">
+                    <h3 class="skill-group-title">Testing &amp; Quality</h3>
+                    <ul class="pills">
+                        <li class="pill">Swift Testing</li>
+                        <li class="pill">XCTest</li>
+                        <li class="pill">SwiftMocks</li>
+                        <li class="pill">Slather</li>
+                        <li class="pill">SonarQube</li>
+                        <li class="pill">SwiftLint</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group reveal">
+                    <h3 class="skill-group-title">CI/CD</h3>
+                    <ul class="pills">
+                        <li class="pill">GitLab CI</li>
+                        <li class="pill">Fastlane</li>
+                        <li class="pill">Firebase Distribution</li>
+                        <li class="pill">TestFlight</li>
+                        <li class="pill">App Store Connect</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group reveal">
+                    <h3 class="skill-group-title">Persistence &amp; Security</h3>
+                    <ul class="pills">
+                        <li class="pill">GRDB</li>
+                        <li class="pill">SQLCipher</li>
+                        <li class="pill">CoreData</li>
+                        <li class="pill">Realm</li>
+                        <li class="pill">Keychain</li>
+                        <li class="pill">AES-256</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
     </main>
-    <!-- Main -->
 
-    <!-- Footer -->
-    <footer class="text-center text-white p-3">
-        Achraf Trabelsi © <span id="year"></span>. All rights reserved.
+    <!-- Footer / contact -->
+    <footer class="site-footer" id="contact">
+        <h2 class="footer-title">Get in touch</h2>
+        <p>Happy to chat about iOS, AI-assisted development and tech leadership.</p>
+        <div class="footer-links">
+            <a href="mailto:trabelsiachraf.mobile@gmail.com">trabelsiachraf.mobile@gmail.com</a>
+            <a href="https://github.com/TrabelsiAchraf" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/achraf-trabelski-83148156/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://twitter.com/Tr_Achraf" target="_blank" rel="noopener">Twitter</a>
+        </div>
+        <p class="footer-copy">Achraf Trabelski © <span id="year"></span> · Paris, France</p>
     </footer>
-    <!-- Footer -->
 
-    <!-- JavaScript -->
     <script src="js/index.js"></script>
-
-    <!-- Popper.js first, then Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
 </body>
 
 </html>
