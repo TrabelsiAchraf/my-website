@@ -16,6 +16,7 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <link rel="stylesheet" href="css/style.css">
+    <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 
 <body>
@@ -23,8 +24,8 @@
     <nav class="site-nav" id="siteNav">
         <div class="nav-inner">
             <a class="nav-brand" href="index.html">Achraf Trabelsi</a>
-            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-            <ul class="nav-links">
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">☰</button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -61,7 +62,7 @@
                         rel="noopener">LinkedIn</a>
                 </div>
             </div>
-            <img src="assets/avatar.png" alt="Achraf Trabelsi's avatar" class="hero-avatar">
+            <img src="assets/avatar.png" alt="Achraf Trabelsi's avatar" class="hero-avatar" width="190" height="190">
         </section>
 
         <!-- Highlights -->
@@ -86,7 +87,7 @@
             </div>
             <div class="badges">
                 <span class="badge"><strong>Technical Reviewer @ Packt</strong> — "AI Driven Swift Architecture"</span>
-                <span class="badge"><strong>Microsoft Imagine Cup 2015</strong> — Winner (Games) · Finalist (Innovation)</span>
+                <span class="badge"><strong>Microsoft Imagine Cup 2015</strong> — Tunisia Local Finals · Winner (Games) · Finalist (Innovation)</span>
             </div>
         </section>
 
