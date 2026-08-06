@@ -630,6 +630,11 @@ img.app-icon {
     margin-bottom: 4px;
 }
 
+.uses-cta {
+    display: inline-block;
+    margin-top: 16px;
+}
+
 /* ============================================================
    Footer / contact
    ============================================================ */
