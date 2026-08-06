@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Uses — Achraf Trabelsi</title>
+    <meta name="description"
+        content="The tools, AI agents and hardware Achraf Trabelsi uses daily as an iOS Tech Lead: Claude Code, MCP servers, Warp, Xcode, and more.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/style.css?v=3">
+    <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+
+<body>
+
+    <nav class="site-nav" id="siteNav">
+        <div class="nav-inner">
+            <a class="nav-brand" href="index.html">Achraf Trabelsi</a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="navLinks">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="uses.html">Uses</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a class="nav-cta" href="files/CV_Achraf_Trabelsi_Resume_EN.pdf" download>Resume ↓</a></li>
+                <li><a class="nav-cta" href="files/CV_Achraf_Trabelsi_Complete_EN.pdf" download>Full CV ↓</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="section">
+            <p class="eyebrow">// uses</p>
+            <h2 class="section-title">What I use</h2>
+            <p class="uses-intro">My daily setup as an iOS Tech Lead — with AI agents at the center of the
+                workflow, not on the side.</p>
+            <blockquote class="uses-quote">Nothing futuristic to look at — just a terminal, tmux and a few
+                git worktrees. The real magic is the swarm of Claude sessions shipping in parallel
+                across them.</blockquote>
+
+            <div class="uses-group uses-featured reveal">
+                <h3 class="uses-group-title"><span class="eyebrow">// ai &amp; agents</span>The core of the workflow</h3>
+                <ul class="uses-list">
+                    <li><strong>Claude Code</strong> — my daily driver: AI pair-programming, Swift Testing
+                        generation, modular refactors and AI-assisted code reviews, every single day.</li>
+                    <li><strong>Custom MCP servers</strong> — XcodeBuildMCP to build &amp; test from the agent,
+                        apple-docs for instant Apple documentation, mobile-mcp for device automation.</li>
+                    <li><strong>Custom Claude Skills</strong> — four skills I wrote for the team: SwiftUI Expert,
+                        Swift Concurrency, Swift Testing, and iOS 26+ Liquid Glass.</li>
+                    <li><strong>Parallel agents</strong> — I typically keep five to ten Claude sessions open,
+                        one per git worktree, with agents working in the background.</li>
+                    <li><strong>Hooks</strong> — a PostToolUse hook auto-runs SwiftLint on every edit the agent
+                        makes; a project-wide CLAUDE.md keeps it native to our codebase.</li>
+                </ul>
+                <blockquote class="uses-quote in-card">When agents are doing real work without a human
+                    manually executing every step, verification becomes the most important part of the
+                    system.</blockquote>
+            </div>
+
+            <div class="uses-columns">
+                <div class="uses-group reveal">
+                    <h3 class="uses-group-title">Terminal</h3>
+                    <ul class="uses-list">
+                        <li><strong>Warp</strong> — my main terminal: fast, AI-aware, great blocks UX.</li>
+                        <li><strong>cmux</strong> — to run several Claude Code sessions side by side.</li>
+                    </ul>
+                </div>
+
+                <div class="uses-group reveal">
+                    <h3 class="uses-group-title">Development</h3>
+                    <ul class="uses-list">
+                        <li><strong>Xcode 26.6</strong> — with Swift 6.3 and SwiftUI.</li>
+                        <li><strong>Swift Testing + XCTest</strong> — coverage reported via Slather &amp; SonarQube.</li>
+                        <li><strong>SPM</strong> — modular micro-apps architecture, no CocoaPods left.</li>
+                        <li><strong>SwiftLint</strong> — strict setup, enforced by CI and by the AI hook.</li>
+                        <li><strong>Instruments &amp; TestFlight</strong> — leak hunting and beta rollouts.</li>
+                    </ul>
+                </div>
+
+                <div class="uses-group reveal">
+                    <h3 class="uses-group-title">Design &amp; collaboration</h3>
+                    <ul class="uses-list">
+                        <li><strong>Figma</strong> — design handoff and our Design System tokens source.</li>
+                        <li><strong>GitLab</strong> — repos, CI pipelines (lint → tests → SonarQube → Firebase).</li>
+                        <li><strong>JIRA &amp; Confluence</strong> — the team's rhythm section.</li>
+                    </ul>
+                </div>
+
+                <div class="uses-group reveal">
+                    <h3 class="uses-group-title">Hardware</h3>
+                    <ul class="uses-list">
+                        <li><strong><a href="https://www.apple.com/fr/macbook-pro/" target="_blank"
+                                    rel="noopener">MacBook Pro M4</a></strong> — 16 GB, my main dev machine.</li>
+                        <li><strong><a href="https://www.amazon.fr/dp/B0BRQ72CHZ" target="_blank"
+                                    rel="noopener">Samsung 49" Odyssey G9</a></strong> — one huge 5120×1440 canvas:
+                            Xcode, simulator and Claude Code side by side.</li>
+                        <li><strong>iPhone &amp; Apple Watch</strong> — daily devices and real-device testing.</li>
+                        <li><strong>iPad</strong> — iPad-idiom testing and reading.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="contact">
+        <h2 class="footer-title">Get in touch</h2>
+        <p>Happy to chat about iOS, AI-assisted development and tech leadership.</p>
+        <div class="footer-links">
+            <a href="mailto:trabelsiachraf.mobile@gmail.com">trabelsiachraf.mobile@gmail.com</a>
+            <a href="https://github.com/TrabelsiAchraf" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/achraf-trabelsi-83148156/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://twitter.com/Tr_Achraf" target="_blank" rel="noopener">Twitter</a>
+        </div>
+        <p class="footer-copy">Achraf Trabelsi © <span id="year"></span> · Paris, France</p>
+    </footer>
+
+    <script src="js/index.js?v=3"></script>
+</body>
+
+</html>

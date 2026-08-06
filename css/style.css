@@ -720,6 +720,86 @@ img.app-icon {
 }
 
 /* ============================================================
+   Uses page
+   ============================================================ */
+.uses-intro {
+    color: var(--text-muted);
+    max-width: 620px;
+    margin: -16px 0 32px;
+}
+
+.uses-quote {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    color: var(--text);
+    border-left: 3px solid;
+    border-image: var(--accent-grad) 1;
+    padding: 10px 0 10px 20px;
+    margin: 0 0 36px;
+    max-width: 640px;
+}
+
+.uses-quote.in-card {
+    font-size: 0.9rem;
+    margin: 20px 0 2px;
+}
+
+.uses-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.uses-featured {
+    border: 1px solid transparent;
+    background:
+        linear-gradient(180deg, var(--accent-soft), var(--surface) 60%) padding-box,
+        linear-gradient(var(--surface), var(--surface)) padding-box,
+        var(--accent-grad) border-box;
+    margin-bottom: 20px;
+}
+
+.uses-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(310px, 100%), 1fr));
+    gap: 20px;
+}
+
+.uses-group-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.uses-group-title .eyebrow {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.uses-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.uses-list li {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.uses-list li:last-child {
+    border-bottom: none;
+}
+
+.uses-list strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* ============================================================
    Scroll reveal
    ============================================================ */
 .reveal {
