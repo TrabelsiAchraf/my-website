@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" font-family="ui-monospace, 'SF Mono', Menlo, monospace">
+  <defs>
+    <linearGradient id="mint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34D399"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="#171D23"/>
+  <circle cx="150" cy="80" r="200" fill="#34D399" opacity="0.05"/>
+  <circle cx="680" cy="390" r="200" fill="#22D3EE" opacity="0.05"/>
+
+  <!-- Three terminal windows: parallel Claude sessions -->
+  <g transform="translate(60,90) rotate(-2)">
+    <rect width="300" height="180" rx="12" fill="#0F1418" stroke="#262E37" stroke-width="2"/>
+    <circle cx="22" cy="20" r="5" fill="#FF5F57"/><circle cx="40" cy="20" r="5" fill="#FEBC2E"/><circle cx="58" cy="20" r="5" fill="#28C840"/>
+    <text x="20" y="52" font-size="13" fill="#98A2AD">~/work-feature-chat %</text>
+    <text x="20" y="76" font-size="13" fill="#2BD3C4">claude ▊</text>
+  </g>
+  <g transform="translate(250,160) rotate(1)">
+    <rect width="300" height="180" rx="12" fill="#11161B" stroke="#2A323B" stroke-width="2"/>
+    <circle cx="22" cy="20" r="5" fill="#FF5F57"/><circle cx="40" cy="20" r="5" fill="#FEBC2E"/><circle cx="58" cy="20" r="5" fill="#28C840"/>
+    <text x="20" y="52" font-size="13" fill="#98A2AD">~/work-fix-sync %</text>
+    <text x="20" y="76" font-size="13" fill="#2BD3C4">claude ▊</text>
+  </g>
+  <g transform="translate(440,110) rotate(2)">
+    <rect width="300" height="180" rx="12" fill="#0F1418" stroke="#262E37" stroke-width="2"/>
+    <circle cx="22" cy="20" r="5" fill="#FF5F57"/><circle cx="40" cy="20" r="5" fill="#FEBC2E"/><circle cx="58" cy="20" r="5" fill="#28C840"/>
+    <text x="20" y="52" font-size="13" fill="#98A2AD">~/work-tests %</text>
+    <text x="20" y="76" font-size="13" fill="#2BD3C4">claude ▊</text>
+    <text x="20" y="104" font-size="12" fill="#E8EAED">✓ 128 tests passed</text>
+  </g>
+
+  <!-- Caption -->
+  <text x="60" y="368" font-size="26" fill="#E8EAED" font-weight="bold">An AI workflow for a real iOS team</text>
+  <text x="60" y="398" font-size="16" fill="url(#mint)">// claude code · mcp · skills · hooks · worktrees</text>
+</svg>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Making Claude Code native to an iOS team — Achraf Trabelsi</title>
+    <meta name="description"
+        content="How I built my team's AI workflow at Oodrive: project CLAUDE.md, MCP servers wired to Xcode, custom Claude Skills, lint hooks, parallel sessions per git worktree — and verification as the core of the system.">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Making Claude Code native to an iOS team">
+    <meta property="og:description"
+        content="CLAUDE.md, MCP servers, custom Skills, hooks and git worktrees: the AI workflow of a real enterprise iOS team.">
+    <meta property="og:url" content="https://trabelsiachraf.com/articles/article2/article2.html">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="../../css/style.css?v=5">
+    <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+
+<body class="article-page">
+
+    <nav class="site-nav" id="siteNav">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../../index.html">Achraf Trabelsi</a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="navLinks">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html#about">About</a></li>
+                <li><a href="../../index.html#experience">Experience</a></li>
+                <li><a href="../../index.html#projects">Projects</a></li>
+                <li><a href="../../index.html#skills">Skills</a></li>
+                <li><a href="../../uses.html">Uses</a></li>
+                <li><a href="../../articles.html">Articles</a></li>
+                <li><a class="nav-cta" href="../../files/CV_Achraf_Trabelsi_Resume_EN.pdf" download>Resume ↓</a></li>
+                <li><a class="nav-cta" href="../../files/CV_Achraf_Trabelsi_Complete_EN.pdf" download>Full CV ↓</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="post">
+        <p class="eyebrow">// ai-assisted development</p>
+        <h1 class="post-title">Making Claude Code native to an iOS team</h1>
+        <p class="post-meta">07 aug 2026 · 10 min read · Achraf Trabelsi, iOS Tech Lead @ Oodrive</p>
+
+        <img class="post-cover" src="resources/cover.svg" alt="Three terminals running parallel Claude sessions"
+            width="800" height="450">
+
+        <p>Everyone on my team had tried AI coding tools. A chat window here, an autocomplete there —
+            useful, but individual. What we didn't have was a <strong>team workflow</strong>: something
+            that makes the agent behave like an engineer who knows our codebase, respects our conventions,
+            and proves its work the same way we have to.</p>
+
+        <p>This is the setup we converged on for <strong>Work</strong>, Oodrive's secure document
+            management app — an enterprise iOS codebase with 6 SPM modules and 5 internal libraries,
+            shipped to clients like LVMH, Crédit Agricole, BNP and the Paris Bar Association. Nothing
+            here is theoretical: it's what runs on our machines every day.</p>
+
+        <p>It's not an experiment on the side anymore — it's simply how the team works, every day,
+            on every branch.</p>
+
+        <h2>1. The foundation: a project CLAUDE.md</h2>
+
+        <p>The single highest-leverage file in the repo. Claude Code reads it at the start of every
+            session, so it's where the codebase explains itself: module map, architecture rules,
+            build commands, and the non-negotiables.</p>
+
+        <pre><code># CLAUDE.md (excerpt)
+
+## Architecture
+- MVVM + Clean Architecture. Presentation → Domain → Data. Never skip a layer.
+- 6 SPM modules: Presentation, OInject, MediaViewer, OBiometrics, OOrientation, DeveloperMode.
+- DI via Swinject through the OoAssembly protocol — never instantiate services directly.
+
+## Conventions
+- Swift 6 strict concurrency. New screens are SwiftUI.
+- Tests use Swift Testing (@Test), not XCTest, for new code.
+- Strings go through the i18n wrapper — no hardcoded user-facing text.
+
+## Definition of done
+- swiftlint --strict passes, tests pass, coverage reported.</code></pre>
+
+        <p>Before CLAUDE.md, every session started with the agent rediscovering the project — and
+            occasionally "improving" things it shouldn't touch. After it, output started looking like
+            it came from someone who'd read our onboarding doc.</p>
+
+        <h2>2. MCP servers: giving the agent hands</h2>
+
+        <p>Out of the box, an agent can edit files. To be useful on iOS it must also
+            <strong>build, test and read documentation</strong>. That's what MCP servers are for —
+            we run three:</p>
+
+        <ul>
+            <li><strong>XcodeBuildMCP</strong> — the agent builds the workspace and runs the test suite
+                itself, then reads the failures. This closes the loop: it doesn't claim something works,
+                it demonstrates it.</li>
+            <li><strong>apple-docs</strong> — direct access to Apple documentation, so API usage is
+                grounded in the current SDK instead of the model's memory.</li>
+            <li><strong>mobile-mcp</strong> — drives the simulator for UI-level checks.</li>
+        </ul>
+
+        <pre><code>// .mcp.json
+{
+  "mcpServers": {
+    "XcodeBuildMCP": { "command": "npx", "args": ["-y", "xcodebuildmcp@latest"] },
+    "apple-docs":    { "command": "npx", "args": ["-y", "apple-docs-mcp"] },
+    "mobile-mcp":    { "command": "npx", "args": ["-y", "@mobilenext/mobile-mcp@latest"] }
+  }
+}</code></pre>
+
+        <p>The day the agent could build, run the failing test, read the error and push a fix on its
+            own, something clicked for the team: we stopped thinking of it as autocomplete and started
+            treating it as a teammate whose work you review.</p>
+
+        <h2>3. Custom Skills: encoding the team's expertise</h2>
+
+        <p>Generic model knowledge is wide but shallow on the things that matter to us. Skills fix
+            that: each one is a markdown playbook the agent loads when the task matches. I wrote four
+            for the team:</p>
+
+        <ul>
+            <li><strong>SwiftUI Expert</strong> — our component patterns, Design System tokens usage,
+                what "good" looks like in our Presentation module.</li>
+            <li><strong>Swift Concurrency</strong> — Swift 6 strict-concurrency rules, actor isolation
+                decisions, the migration patterns we standardized.</li>
+            <li><strong>Swift Testing</strong> — how we structure @Test suites, our mocking approach
+                (SwiftMocks), what must be covered before a PR.</li>
+            <li><strong>iOS 26+ Liquid Glass</strong> — the new design language, so UI proposals target
+                what Apple ships now, not 2023 blog posts.</li>
+        </ul>
+
+        <pre><code>---
+name: swift-testing
+description: Writing tests the Work way — Swift Testing, SwiftMocks, coverage rules
+---
+
+When writing tests for this codebase:
+- Use Swift Testing (@Test, #expect) — XCTest only for legacy suites.
+- One behavior per test; name tests after the behavior, not the method.
+- Mock through SwiftMocks protocols from OoInject — never hit network or disk.
+…</code></pre>
+
+        <h2>4. Hooks: quality that doesn't rely on memory</h2>
+
+        <p>Here's the thing about agents: they edit a lot of files, fast. Asking a human to check
+            style on every edit doesn't scale. So the check runs itself — a PostToolUse hook fires
+            SwiftLint after <em>every</em> file the agent touches, and feeds violations straight back
+            into the session:</p>
+
+        <pre><code>// .claude/settings.json (excerpt)
+{
+  "hooks": {
+    "PostToolUse": [{
+      "matcher": "Write|Edit",
+      "hooks": [{ "type": "command",
+                  "command": "jq -r '.tool_input.file_path' | { read -r f; swiftlint lint --strict \"$f\"; }" }]
+    }]
+  }
+}</code></pre>
+
+        <p>The agent fixes its own lint violations before I ever see the diff. The rule is enforced
+            by the system, not by discipline.</p>
+
+        <h2>5. Scaling up: one session per git worktree</h2>
+
+        <p>Nothing futuristic to look at — just a terminal, tmux and a few git worktrees. I typically
+            keep five to ten Claude sessions open, <strong>one per worktree</strong>, each on its own
+            branch: a feature here, a flaky test hunt there, a refactor in the background.</p>
+
+        <pre><code>git worktree add ../work-feature-chat feature/chat-attachments
+git worktree add ../work-fix-sync fix/offline-sync
+# one terminal tab + one claude session per worktree</code></pre>
+
+        <p>Worktrees keep the agents from stepping on each other; the branch model keeps every change
+            reviewable. My job shifts from typing code to <strong>routing work and reviewing
+            results</strong> — much closer to what a tech lead does anyway.</p>
+
+        <h2>6. Verification is the system</h2>
+
+        <p>When agents are doing real work without a human manually executing every step,
+            <strong>verification becomes the most important part of the system</strong>. Ours is
+            layered:</p>
+
+        <ul>
+            <li>the lint hook catches style on every edit;</li>
+            <li>XcodeBuildMCP lets the agent prove its change compiles and passes tests before it
+                reports done;</li>
+            <li>the GitLab pipeline replays everything — lint → tests + coverage → SonarQube → Firebase;</li>
+            <li>and a human reviews every merge request. The agent writes code; it doesn't get merge
+                rights.</li>
+        </ul>
+
+        <h2>What actually changed</h2>
+
+        <p>I won't give you vanity metrics — we don't measure this workflow in lines per hour. What we
+            see is simpler and more meaningful: <strong>our velocity has gone up, sprint after
+            sprint</strong>, and the team just moves better.</p>
+
+        <p>The real lesson is a mindset shift. Claude Code is not a tool to accelerate typing.
+            Set up properly, it's closer to <strong>a new colleague</strong>: it does good work
+            <em>with</em> us because we gave it the right context to read and the same tools we use
+            every day — exactly like onboarding a real developer into the team. Skip that onboarding
+            and you get a fast intern guessing; do it and you get a teammate.</p>
+
+        <h2>Takeaways</h2>
+
+        <ul>
+            <li><strong>Treat the agent like a new teammate, not a faster keyboard.</strong> Onboard
+                it: context, tools, standards.</li>
+            <li><strong>Invest in context, not prompts.</strong> One good CLAUDE.md beats a hundred
+                clever prompts.</li>
+            <li><strong>Give the agent the same tools you use.</strong> If it can't build and test,
+                it can only guess.</li>
+            <li><strong>Encode your standards as Skills and hooks</strong> — systems scale,
+                discipline doesn't.</li>
+            <li><strong>Parallelize with worktrees</strong>, review like a lead.</li>
+            <li><strong>Trust nothing without verification.</strong> That's not distrust of AI —
+                it's how good engineering already worked.</li>
+        </ul>
+
+        <p class="post-outro">Questions, war stories, or a setup of your own to compare? I'm happy to
+            chat — <a href="mailto:trabelsiachraf.mobile@gmail.com">email</a> or
+            <a href="https://www.linkedin.com/in/achraf-trabelsi-83148156/" target="_blank"
+                rel="noopener">LinkedIn</a>.</p>
+    </main>
+
+    <footer class="site-footer" id="contact">
+        <h2 class="footer-title">Get in touch</h2>
+        <p>Happy to chat about iOS, AI-assisted development and tech leadership.</p>
+        <div class="footer-links">
+            <a href="mailto:trabelsiachraf.mobile@gmail.com">trabelsiachraf.mobile@gmail.com</a>
+            <a href="https://github.com/TrabelsiAchraf" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/achraf-trabelsi-83148156/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://twitter.com/Tr_Achraf" target="_blank" rel="noopener">Twitter</a>
+            <a href="../../uses.html">What I use</a>
+        </div>
+        <p class="footer-copy">Achraf Trabelsi © <span id="year"></span> · Paris, France</p>
+    </footer>
+
+    <script src="../../js/index.js?v=5"></script>
+</body>
+
+</html>

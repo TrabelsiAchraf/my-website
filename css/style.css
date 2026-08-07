@@ -805,6 +805,101 @@ img.app-icon {
 }
 
 /* ============================================================
+   Post (modern article pages)
+   ============================================================ */
+.post {
+    max-width: 760px;
+    padding-bottom: 40px;
+}
+
+.post-title {
+    font-size: clamp(1.9rem, 4.5vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 0 0 12px;
+}
+
+.post-meta {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0 0 28px;
+}
+
+.post-cover {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 36px;
+}
+
+.post h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 44px 0 14px;
+}
+
+.post p,
+.post li {
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.post p strong,
+.post li strong {
+    color: var(--text);
+}
+
+.post ul {
+    padding-left: 22px;
+    margin: 0 0 18px;
+}
+
+.post li {
+    margin-bottom: 8px;
+}
+
+.post pre {
+    background: #0F1418;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    overflow-x: auto;
+    margin: 18px 0 24px;
+}
+
+.post code {
+    font-family: var(--mono);
+    font-size: 0.84rem;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.post .eyebrow {
+    margin-bottom: 10px;
+}
+
+.post-outro {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    margin-top: 40px;
+}
+
+.draft-note {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: #FFB4A8;
+    background: rgba(240, 81, 56, 0.08);
+    border: 1px dashed #F05138;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 20px 0;
+}
+
+/* ============================================================
    Scroll reveal
    ============================================================ */
 .reveal {
