@@ -31,4 +31,4 @@ Integrations, role **Admin** or **Finance**) and add four repository secrets:
 `ASC_VENDOR_NUMBER` (Sales & Trends → About Reports). Then trigger the
 workflow manually once (Actions → App Store stats → Run workflow).
 
-Tests: `node --test scripts/ scripts/lib/`
+Tests: `node --test`
