@@ -28,6 +28,8 @@ export function parseSalesReport(tsv) {
     const iType = headers.indexOf("Product Type Identifier");
     const iUnits = headers.indexOf("Units");
     const iBegin = headers.indexOf("Begin Date");
+    const iDevice = headers.indexOf("Device");
+    const iCountry = headers.indexOf("Country Code");
     return lines.slice(1).map((line) => {
         const cells = line.split("\t");
         return {
@@ -36,6 +38,8 @@ export function parseSalesReport(tsv) {
             productType: cells[iType],
             units: Number(cells[iUnits]),
             date: isoDate(cells[iBegin]),
+            device: iDevice >= 0 ? cells[iDevice] : null,
+            country: iCountry >= 0 ? cells[iCountry] : null,
         };
     });
 }
