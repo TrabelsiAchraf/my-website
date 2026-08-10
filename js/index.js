@@ -38,3 +38,19 @@ if ("IntersectionObserver" in window) {
 } else {
     revealed.forEach((el) => el.classList.add("visible"));
 }
+
+// Hidden entry to the stats page: 6 quick taps on the home avatar
+// (counter resets if more than 1.5s passes between taps)
+const avatar = document.querySelector(".hero-avatar");
+if (avatar) {
+    let taps = 0;
+    let lastTap = 0;
+    avatar.addEventListener("click", () => {
+        const now = Date.now();
+        taps = now - lastTap > 1500 ? 1 : taps + 1;
+        lastTap = now;
+        if (taps >= 6) {
+            window.location.href = "stats.html";
+        }
+    });
+}
