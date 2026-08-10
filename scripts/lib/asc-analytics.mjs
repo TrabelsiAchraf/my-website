@@ -18,33 +18,41 @@ export function parseActiveDevicesCsv(csv) {
 }
 
 export async function ensureReportRequest(client, appId) {
-    const existing = await client.getJson(`/v1/apps/${appId}/analyticsReportRequests?filter[accessType]=ONGOING`);
-    const found = existing?.data?.find((r) => r.attributes?.accessType === "ONGOING");
-    if (found) return found.id;
-    const created = await client.postJson("/v1/analyticsReportRequests", {
-        data: {
-            type: "analyticsReportRequests",
-            attributes: { accessType: "ONGOING" },
-            relationships: { app: { data: { type: "apps", id: appId } } },
-        },
-    });
-    return created?.data?.id ?? null;
+    try {
+        const existing = await client.getJson(`/v1/apps/${appId}/analyticsReportRequests?filter[accessType]=ONGOING`);
+        const found = existing?.data?.find((r) => r.attributes?.accessType === "ONGOING");
+        if (found) return found.id;
+        const created = await client.postJson("/v1/analyticsReportRequests", {
+            data: {
+                type: "analyticsReportRequests",
+                attributes: { accessType: "ONGOING" },
+                relationships: { app: { data: { type: "apps", id: appId } } },
+            },
+        });
+        return created?.data?.id ?? null;
+    } catch {
+        return null;
+    }
 }
 
 export async function latestActiveDevices(client, requestId, fetchImpl = fetch) {
-    const reports = await client.getJson(`/v1/analyticsReportRequests/${requestId}/reports?filter[category]=APP_USAGE`);
-    const report = reports?.data?.find((r) => r.attributes?.name === "Active Devices");
-    if (!report) return null;
-    const instances = await client.getJson(`/v1/analyticsReports/${report.id}/instances?filter[granularity]=DAILY`);
-    const latest = instances?.data
-        ?.filter((i) => i.attributes?.granularity === "DAILY")
-        .sort((a, b) => (a.attributes.processingDate < b.attributes.processingDate ? -1 : 1))
-        .at(-1);
-    if (!latest) return null;
-    const segments = await client.getJson(`/v1/analyticsReportInstances/${latest.id}/segments`);
-    const url = segments?.data?.[0]?.attributes?.url;
-    if (!url) return null;
-    const res = await fetchImpl(url);
-    if (!res.ok) return null;
-    return parseActiveDevicesCsv(gunzipSync(Buffer.from(await res.arrayBuffer())).toString("utf8"));
+    try {
+        const reports = await client.getJson(`/v1/analyticsReportRequests/${requestId}/reports?filter[category]=APP_USAGE`);
+        const report = reports?.data?.find((r) => r.attributes?.name === "Active Devices");
+        if (!report) return null;
+        const instances = await client.getJson(`/v1/analyticsReports/${report.id}/instances?filter[granularity]=DAILY`);
+        const latest = instances?.data
+            ?.filter((i) => i.attributes?.granularity === "DAILY")
+            .sort((a, b) => (a.attributes.processingDate < b.attributes.processingDate ? -1 : 1))
+            .at(-1);
+        if (!latest) return null;
+        const segments = await client.getJson(`/v1/analyticsReportInstances/${latest.id}/segments`);
+        const url = segments?.data?.[0]?.attributes?.url;
+        if (!url) return null;
+        const res = await fetchImpl(url);
+        if (!res.ok) return null;
+        return parseActiveDevicesCsv(gunzipSync(Buffer.from(await res.arrayBuffer())).toString("utf8"));
+    } catch {
+        return null;
+    }
 }

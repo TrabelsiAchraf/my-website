@@ -71,3 +71,66 @@ test("latestActiveDevices returns null when any step yields nothing", async () =
   const missing = { getJson: async () => null };
   assert.equal(await latestActiveDevices(missing, "req-1", async () => new Response("", { status: 200 })), null);
 });
+
+test("ensureReportRequest returns null when client.getJson throws", async () => {
+  const client = {
+    getJson: async () => { throw new Error("403 Forbidden"); },
+    postJson: async () => { throw new Error("must not reach"); },
+  };
+  assert.equal(await ensureReportRequest(client, "111"), null);
+});
+
+test("ensureReportRequest returns null when client.postJson throws", async () => {
+  const client = {
+    getJson: async () => ({ data: [] }),
+    postJson: async () => { throw new Error("429 Rate Limit"); },
+  };
+  assert.equal(await ensureReportRequest(client, "111"), null);
+});
+
+test("latestActiveDevices returns null when client.getJson throws", async () => {
+  const client = {
+    getJson: async () => { throw new Error("403 Forbidden"); },
+  };
+  assert.equal(await latestActiveDevices(client, "req-1", async () => new Response("", { status: 200 })), null);
+});
+
+test("latestActiveDevices returns null when segment download returns non-gzip body", async () => {
+  const csv = "Date,Active Devices\n2026-08-08,31";
+  const client = {
+    getJson: async (path) => {
+      if (path.includes("/reports")) return { data: [{ id: "rep-1", attributes: { name: "Active Devices", category: "APP_USAGE" } }] };
+      if (path.includes("/instances")) return { data: [{ id: "in-1", attributes: { granularity: "DAILY", processingDate: "2026-08-08" } }] };
+      if (path.includes("/segments")) return { data: [{ attributes: { url: "https://signed.example/segment.gz" } }] };
+      throw new Error(`unexpected path ${path}`);
+    },
+  };
+  const fetchImpl = async (url) => {
+    // Return non-gzip body, will cause gunzipSync to throw
+    return new Response("not-gzip-data", { status: 200 });
+  };
+  assert.equal(await latestActiveDevices(client, "req-1", fetchImpl), null);
+});
+
+test("latestActiveDevices returns null when instances list is empty", async () => {
+  const client = {
+    getJson: async (path) => {
+      if (path.includes("/reports")) return { data: [{ id: "rep-1", attributes: { name: "Active Devices", category: "APP_USAGE" } }] };
+      if (path.includes("/instances")) return { data: [] };
+      throw new Error(`unexpected path ${path}`);
+    },
+  };
+  assert.equal(await latestActiveDevices(client, "req-1", async () => new Response("", { status: 200 })), null);
+});
+
+test("latestActiveDevices returns null when segments list has no URL", async () => {
+  const client = {
+    getJson: async (path) => {
+      if (path.includes("/reports")) return { data: [{ id: "rep-1", attributes: { name: "Active Devices", category: "APP_USAGE" } }] };
+      if (path.includes("/instances")) return { data: [{ id: "in-1", attributes: { granularity: "DAILY", processingDate: "2026-08-08" } }] };
+      if (path.includes("/segments")) return { data: [{ attributes: {} }] };
+      throw new Error(`unexpected path ${path}`);
+    },
+  };
+  assert.equal(await latestActiveDevices(client, "req-1", async () => new Response("", { status: 200 })), null);
+});
