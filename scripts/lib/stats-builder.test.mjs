@@ -80,3 +80,48 @@ test("apps are sorted by total downloads, descending", () => {
   });
   assert.deepEqual(stats.apps.map((a) => a.name), ["Wobli", "Adhkar"]);
 });
+
+test("aggregates devices, countries and updates from counted rows only", () => {
+  const stats = buildStats({
+    apps: [APP],
+    monthlyRows: [
+      row({ date: "2026-07-01", units: 80, device: "iPhone", country: "FR" }),
+      row({ date: "2026-07-01", units: 15, device: "iPad", country: "US" }),
+      row({ date: "2026-07-01", units: 200, productType: "7T", device: "iPhone", country: "FR" }), // update
+    ],
+    dailyRows: [
+      // July daily: covered by monthly report -> must NOT count in splits either
+      row({ date: "2026-07-20", units: 99, device: "iPhone", country: "DE" }),
+      row({ date: "2026-08-09", units: 5, device: "iPhone", country: "FR" }),
+      row({ date: "2026-08-09", units: 2, productType: "7F", device: "iPad", country: "US" }), // update
+    ],
+    today: "2026-08-10",
+  });
+  const app = stats.apps[0];
+  assert.deepEqual(app.devices, { iPhone: 85, iPad: 15 });
+  assert.deepEqual(app.countries, { FR: 85, US: 15 });
+  assert.equal(app.updates.total, 202);
+  assert.equal(app.downloads.total, 100); // v1 unchanged
+});
+
+test("missing device/country fall back to Unknown, activeDevices defaults to null", () => {
+  const stats = buildStats({
+    apps: [APP],
+    monthlyRows: [row({ date: "2026-07-01", units: 7 })], // no device/country fields
+    dailyRows: [],
+    today: "2026-08-10",
+  });
+  assert.deepEqual(stats.apps[0].devices, { Unknown: 7 });
+  assert.equal(stats.apps[0].activeDevices, null);
+});
+
+test("activeDevicesByApp is wired through", () => {
+  const stats = buildStats({
+    apps: [APP],
+    monthlyRows: [],
+    dailyRows: [],
+    today: "2026-08-10",
+    activeDevicesByApp: new Map([["111", 31]]),
+  });
+  assert.equal(stats.apps[0].activeDevices, 31);
+});

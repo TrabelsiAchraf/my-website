@@ -12,6 +12,16 @@ function sumByApp(rows, category) {
     return totals;
 }
 
+function sumByField(rows, appleId, category, field) {
+    const totals = new Map();
+    for (const r of rows) {
+        if (r.appleId !== appleId || classifyProductType(r.productType) !== category) continue;
+        const key = r[field] ?? "Unknown";
+        totals.set(key, (totals.get(key) ?? 0) + r.units);
+    }
+    return Object.fromEntries([...totals.entries()].sort((a, b) => b[1] - a[1]));
+}
+
 function dailyDownloadSeries(rows, appleId, start, end) {
     const byDate = new Map();
     for (const r of rows) {
@@ -21,7 +31,7 @@ function dailyDownloadSeries(rows, appleId, start, end) {
     return [...dateRange(start, end)].map((date) => ({ date, units: byDate.get(date) ?? 0 }));
 }
 
-export function buildStats({ apps, monthlyRows, dailyRows, today }) {
+export function buildStats({ apps, monthlyRows, dailyRows, today, activeDevicesByApp = new Map() }) {
     const end = daysAgo(today, 1);
     const start = daysAgo(today, 90);
     const monthlyDownloads = sumByApp(monthlyRows, "download");
@@ -36,6 +46,9 @@ export function buildStats({ apps, monthlyRows, dailyRows, today }) {
     const uncoveredDailyRows = dailyRows.filter((r) => !coveredMonths.has(r.date.slice(0, 7)));
     const uncoveredDownloads = sumByApp(uncoveredDailyRows, "download");
     const uncoveredRedownloads = sumByApp(uncoveredDailyRows, "redownload");
+
+    // Reuse coverage logic for splits: count only rows that feed download/update totals
+    const countedRows = [...monthlyRows, ...uncoveredDailyRows];
 
     const entries = apps.map((app) => {
         const daily = dailyDownloadSeries(dailyRows, app.id, start, end);
@@ -54,6 +67,10 @@ export function buildStats({ apps, monthlyRows, dailyRows, today }) {
             redownloads: {
                 total: (monthlyRedownloads.get(app.id) ?? 0) + (uncoveredRedownloads.get(app.id) ?? 0),
             },
+            devices: sumByField(countedRows, app.id, "download", "device"),
+            countries: sumByField(countedRows, app.id, "download", "country"),
+            updates: { total: sumByApp(countedRows, "update").get(app.id) ?? 0 },
+            activeDevices: activeDevicesByApp.get(app.id) ?? null,
         };
     });
     entries.sort((a, b) => b.downloads.total - a.downloads.total);
