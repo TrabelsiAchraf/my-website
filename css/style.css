@@ -1052,6 +1052,10 @@ body.article-page {
     margin-top: 24px;
 }
 
+.stats-summary[hidden] {
+    display: none;
+}
+
 .stats-total {
     font-size: 1.35rem;
     font-weight: 700;

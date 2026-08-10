@@ -24,14 +24,18 @@ function dailyDownloadSeries(rows, appleId, start, end) {
 export function buildStats({ apps, monthlyRows, dailyRows, today }) {
     const end = daysAgo(today, 1);
     const start = daysAgo(today, 90);
-    const currentMonthStart = `${today.slice(0, 7)}-01`;
     const monthlyDownloads = sumByApp(monthlyRows, "download");
     const monthlyRedownloads = sumByApp(monthlyRows, "redownload");
-    // Daily rows for the current month only — earlier days are already
-    // covered by the monthly reports.
-    const currentMonthRows = dailyRows.filter((r) => r.date >= currentMonthStart);
-    const currentMonthDownloads = sumByApp(currentMonthRows, "download");
-    const currentMonthRedownloads = sumByApp(currentMonthRows, "redownload");
+    // Apple publishes a month's MONTHLY report ~5 days after that month ends,
+    // so right after a month boundary the most recent completed month has no
+    // monthly report yet. Rather than assuming "current month" is the only
+    // gap, derive coverage from the data: any daily row whose month isn't
+    // covered by a fetched monthly report is added on top (the 90-day window
+    // comfortably covers the gap either way).
+    const coveredMonths = new Set(monthlyRows.map((r) => r.date.slice(0, 7)));
+    const uncoveredDailyRows = dailyRows.filter((r) => !coveredMonths.has(r.date.slice(0, 7)));
+    const uncoveredDownloads = sumByApp(uncoveredDailyRows, "download");
+    const uncoveredRedownloads = sumByApp(uncoveredDailyRows, "redownload");
 
     const entries = apps.map((app) => {
         const daily = dailyDownloadSeries(dailyRows, app.id, start, end);
@@ -42,13 +46,13 @@ export function buildStats({ apps, monthlyRows, dailyRows, today }) {
             bundleId: app.bundleId,
             iconUrl: app.iconUrl,
             downloads: {
-                total: (monthlyDownloads.get(app.id) ?? 0) + (currentMonthDownloads.get(app.id) ?? 0),
+                total: (monthlyDownloads.get(app.id) ?? 0) + (uncoveredDownloads.get(app.id) ?? 0),
                 last7Days: windowSum(7),
                 last30Days: windowSum(30),
                 daily,
             },
             redownloads: {
-                total: (monthlyRedownloads.get(app.id) ?? 0) + (currentMonthRedownloads.get(app.id) ?? 0),
+                total: (monthlyRedownloads.get(app.id) ?? 0) + (uncoveredRedownloads.get(app.id) ?? 0),
             },
         };
     });

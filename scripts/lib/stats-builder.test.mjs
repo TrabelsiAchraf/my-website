@@ -26,6 +26,21 @@ test("total = monthly downloads + current-month daily downloads, no double count
   assert.equal(stats.totals.downloads, 103);
 });
 
+test("month-boundary: previous month's dailies count when its monthly report isn't published yet", () => {
+  const stats = buildStats({
+    apps: [APP],
+    // Only June's monthly report has been published so far (Apple publishes
+    // a month's report ~5 days after it ends).
+    monthlyRows: [row({ date: "2026-06-01", units: 100 })],
+    // July has no monthly report yet, so its dailies must be counted in full,
+    // alongside August's (current month) dailies.
+    dailyRows: [row({ date: "2026-07-15", units: 20 }), row({ date: "2026-08-02", units: 4 })],
+    today: "2026-08-03",
+  });
+  assert.equal(stats.apps[0].downloads.total, 124); // 100 (June) + 20 (July) + 4 (August)
+  assert.equal(stats.totals.downloads, 124);
+});
+
 test("updates and redownloads are excluded from download counts", () => {
   const stats = buildStats({
     apps: [APP],

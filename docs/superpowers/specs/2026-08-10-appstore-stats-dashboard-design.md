@@ -40,9 +40,9 @@ my-website/
 └── .github/workflows/appstore-stats.yml   ← cron quotidien GitHub Actions
 ```
 
-Flux : chaque matin (cron `0 8 * * *` UTC, soit 09h00–10h00 à Paris selon la saison ;
-l'heure exacte n'est pas critique, les rapports Apple de la veille sont déjà publiés),
-le workflow
+Flux : chaque après-midi (cron `0 14 * * *` UTC, soit ~15h00–16h00 à Paris ;
+l'heure a été choisie pour suivre la publication des rapports Apple, qui paraît
+vers 5h du matin heure du Pacifique, soit ~12h00–13h00 UTC), le workflow
 GitHub Actions exécute le script Node, qui appelle l'API App Store Connect, régénère
 `data/appstore-stats.json` et le commite sur `main` (uniquement si le contenu a
 changé). GitHub Pages redéploie automatiquement. Aucun serveur.
@@ -84,6 +84,11 @@ décompression gzip via `node:zlib`).
    `7`, `7F`, `7T`, `F7` = mises à jour (comptées séparément, non affichées en v1).
    Les unités négatives (remboursements) sont soustraites telles quelles.
 5. **Écriture** de `data/appstore-stats.json`.
+
+Cumul : le total additionne les rapports mensuels déjà publiés et, pour les mois non
+encore couverts par un rapport mensuel (Apple les publie ~5 jours après la fin du
+mois), les lignes quotidiennes correspondantes — ce qui évite un creux artificiel
+sur le total public en tout début de mois.
 
 ### Format de `data/appstore-stats.json`
 
@@ -128,7 +133,7 @@ librairie, aucun build.
 
 ## Workflow GitHub Actions (`appstore-stats.yml`)
 
-- Déclencheurs : `schedule` (cron `0 8 * * *`) + `workflow_dispatch` (lancement
+- Déclencheurs : `schedule` (cron `0 14 * * *`) + `workflow_dispatch` (lancement
   manuel pour tester).
 - Étapes : checkout → setup Node 20 → `node scripts/fetch-appstore-stats.mjs`
   (secrets exposés en variables d'environnement) → commit + push de
