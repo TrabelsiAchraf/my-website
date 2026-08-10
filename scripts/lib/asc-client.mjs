@@ -19,10 +19,11 @@ export function makeToken({ issuerId, keyId, privateKey }, nowSeconds = Math.flo
 }
 
 export function createClient(credentials, fetchImpl = fetch) {
-    async function request(path) {
-        const headers = { Authorization: `Bearer ${makeToken(credentials)}` };
+    async function request(path, init = {}) {
+        const headers = { Authorization: `Bearer ${makeToken(credentials)}`, ...init.headers };
+        const options = { ...init, headers };
         for (let attempt = 0; ; attempt++) {
-            const res = await fetchImpl(`${API_BASE}${path}`, { headers });
+            const res = await fetchImpl(`${API_BASE}${path}`, options);
             if (res.status === 404) return null;
             if (res.status >= 500 && attempt === 0) {
                 await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
@@ -51,6 +52,20 @@ export function createClient(credentials, fetchImpl = fetch) {
             const res = await request(`/v1/salesReports?${params}`);
             if (res === null) return null;
             return gunzipSync(Buffer.from(await res.arrayBuffer())).toString("utf8");
+        },
+
+        async getJson(path) {
+            const res = await request(path);
+            return res === null ? null : res.json();
+        },
+
+        async postJson(path, body) {
+            const res = await request(path, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+            return res.json();
         },
     };
 }

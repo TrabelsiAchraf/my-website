@@ -58,3 +58,24 @@ test("non-OK non-404 response throws with status", async () => {
     /ASC API 403/,
   );
 });
+
+test("getJson returns parsed JSON and null on 404", async () => {
+  const ok = createClient(CREDS, async () => new Response('{"data":[1]}', { status: 200 }));
+  assert.deepEqual(await ok.getJson("/v1/whatever"), { data: [1] });
+  const missing = createClient(CREDS, async () => new Response("nope", { status: 404 }));
+  assert.equal(await missing.getJson("/v1/whatever"), null);
+});
+
+test("postJson sends the body with auth and content-type headers", async () => {
+  let captured;
+  const client = createClient(CREDS, async (url, opts) => {
+    captured = { url, opts };
+    return new Response('{"data":{"id":"r1"}}', { status: 201 });
+  });
+  const out = await client.postJson("/v1/things", { data: { type: "things" } });
+  assert.deepEqual(out, { data: { id: "r1" } });
+  assert.equal(captured.opts.method, "POST");
+  assert.equal(captured.opts.headers["Content-Type"], "application/json");
+  assert.match(captured.opts.headers.Authorization, /^Bearer /);
+  assert.deepEqual(JSON.parse(captured.opts.body), { data: { type: "things" } });
+});
