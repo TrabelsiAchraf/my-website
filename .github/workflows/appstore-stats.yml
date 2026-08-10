@@ -1,0 +1,42 @@
+name: App Store stats
+
+on:
+  schedule:
+    - cron: "0 8 * * *" # daily, ~09:00-10:00 Paris
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run tests
+        run: node --test scripts/ scripts/lib/
+
+      - name: Fetch App Store stats
+        run: node scripts/fetch-appstore-stats.mjs
+        env:
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+          ASC_VENDOR_NUMBER: ${{ secrets.ASC_VENDOR_NUMBER }}
+
+      - name: Commit updated stats
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/appstore-stats.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update App Store stats"
+            git push
+          fi
