@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-10T14:39:03.068Z",
+  "lastUpdated": "2026-08-10T16:39:30.461Z",
   "totals": {
     "downloads": 129
   },
@@ -378,7 +378,38 @@
       },
       "redownloads": {
         "total": 13
-      }
+      },
+      "devices": {
+        "iPhone": 82,
+        "Desktop": 12,
+        "iPad": 6
+      },
+      "countries": {
+        "US": 30,
+        "GB": 29,
+        "FR": 9,
+        "CA": 7,
+        "AU": 4,
+        "SA": 2,
+        "NO": 2,
+        "KR": 2,
+        "JP": 2,
+        "IE": 2,
+        "DE": 2,
+        "CH": 1,
+        "AR": 1,
+        "CN": 1,
+        "ML": 1,
+        "BE": 1,
+        "NG": 1,
+        "SG": 1,
+        "MA": 1,
+        "CO": 1
+      },
+      "updates": {
+        "total": 37
+      },
+      "activeDevices": null
     },
     {
       "id": "6768824373",
@@ -754,7 +785,28 @@
       },
       "redownloads": {
         "total": 0
-      }
+      },
+      "devices": {
+        "iPhone": 21,
+        "iPad": 2,
+        "Desktop": 2
+      },
+      "countries": {
+        "SN": 8,
+        "FR": 6,
+        "US": 4,
+        "CA": 1,
+        "CG": 1,
+        "JP": 1,
+        "XK": 1,
+        "KG": 1,
+        "DK": 1,
+        "EG": 1
+      },
+      "updates": {
+        "total": 0
+      },
+      "activeDevices": null
     },
     {
       "id": "6761739430",
@@ -1130,7 +1182,20 @@
       },
       "redownloads": {
         "total": 0
-      }
+      },
+      "devices": {
+        "Desktop": 4
+      },
+      "countries": {
+        "TN": 2,
+        "US": 1,
+        "FR": 1,
+        "DE": 0
+      },
+      "updates": {
+        "total": 4
+      },
+      "activeDevices": null
     }
   ]
 }
