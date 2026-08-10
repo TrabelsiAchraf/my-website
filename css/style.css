@@ -1122,6 +1122,21 @@ body.article-page {
     margin: 10px 0 0;
 }
 
+.stat-detail {
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    margin: 8px 0 0;
+}
+
+.stats-breakdown {
+    width: 100%;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    margin: 4px 0 0;
+}
+
 .stat-sparkline {
     display: block;
     width: 100%;

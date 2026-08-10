@@ -25,6 +25,20 @@ function sparklinePath(values, width, height) {
         .join(" ");
 }
 
+// "FR" -> "🇫🇷" (regional indicator symbols); returns the code itself if not 2 letters.
+function flagEmoji(code) {
+    if (!/^[A-Z]{2}$/.test(code)) return code;
+    return String.fromCodePoint(...[...code].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
+}
+
+function detailLine(className, text, title) {
+    const p = document.createElement("p");
+    p.className = `stat-detail ${className}`;
+    p.textContent = text;
+    if (title) p.title = title;
+    return p;
+}
+
 function appCard(app) {
     const card = document.createElement("article");
     card.className = "stat-card reveal";
@@ -70,6 +84,23 @@ function appCard(app) {
     svg.appendChild(path);
     card.appendChild(svg);
 
+    if (app.devices && Object.keys(app.devices).length > 0) {
+        const parts = Object.entries(app.devices).map(([d, n]) => `${d} ${formatNumber(n)}`);
+        card.appendChild(detailLine("stat-devices", `📱 ${parts.join(" · ")}`));
+    }
+    if (app.countries && Object.keys(app.countries).length > 0) {
+        const entries = Object.entries(app.countries);
+        const top = entries.slice(0, 3).map(([c, n]) => `${flagEmoji(c)} ${formatNumber(n)}`);
+        const rest = entries.length > 3 ? ` +${entries.length - 3}` : "";
+        const full = entries.map(([c, n]) => `${c}: ${n}`).join(", ");
+        card.appendChild(detailLine("stat-countries", top.join(" · ") + rest, full));
+    }
+    if (app.updates || app.activeDevices !== undefined) {
+        const updates = app.updates ? `↺ ${formatNumber(app.updates.total)} updates` : null;
+        const active = `◉ ${app.activeDevices ?? "—"} active (opt-in)`;
+        card.appendChild(detailLine("stat-usage", [updates, active].filter(Boolean).join(" · ")));
+    }
+
     return card;
 }
 
@@ -82,6 +113,18 @@ function render(stats) {
     stats.apps.forEach((app) => grid.appendChild(appCard(app)));
     // Cards created after index.js ran: reveal them immediately.
     grid.querySelectorAll(".reveal").forEach((el) => el.classList.add("visible"));
+
+    const allDevices = {};
+    const allCountries = new Set();
+    for (const app of stats.apps) {
+        for (const [d, n] of Object.entries(app.devices ?? {})) allDevices[d] = (allDevices[d] ?? 0) + n;
+        for (const c of Object.keys(app.countries ?? {})) allCountries.add(c);
+    }
+    if (Object.keys(allDevices).length > 0) {
+        const parts = Object.entries(allDevices).sort((a, b) => b[1] - a[1]).map(([d, n]) => `${d} ${formatNumber(n)}`);
+        const summary = document.getElementById("statsSummary");
+        summary.appendChild(detailLine("stats-breakdown", `${parts.join(" · ")} · ${allCountries.size} countries`));
+    }
 }
 
 (async function load() {
