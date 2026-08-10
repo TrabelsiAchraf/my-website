@@ -1,0 +1,27 @@
+{
+  "lastUpdated": "2026-08-10T08:00:00Z",
+  "totals": { "downloads": 1234 },
+  "apps": [
+    {
+      "id": "0000000001",
+      "name": "Sample App",
+      "bundleId": "com.example.sample",
+      "iconUrl": null,
+      "downloads": {
+        "total": 1234,
+        "last7Days": 21,
+        "last30Days": 90,
+        "daily": [
+          { "date": "2026-08-03", "units": 2 },
+          { "date": "2026-08-04", "units": 5 },
+          { "date": "2026-08-05", "units": 1 },
+          { "date": "2026-08-06", "units": 0 },
+          { "date": "2026-08-07", "units": 4 },
+          { "date": "2026-08-08", "units": 6 },
+          { "date": "2026-08-09", "units": 3 }
+        ]
+      },
+      "redownloads": { "total": 56 }
+    }
+  ]
+}

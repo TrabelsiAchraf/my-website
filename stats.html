@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App Stats — Achraf Trabelsi</title>
+    <meta name="description"
+        content="Live download numbers for Achraf Trabelsi's personal iOS apps — exact figures from Apple's sales reports, refreshed daily.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/style.css?v=6">
+    <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+
+<body>
+
+    <nav class="site-nav" id="siteNav">
+        <div class="nav-inner">
+            <a class="nav-brand" href="index.html">Achraf Trabelsi</a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="navLinks">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="uses.html">Uses</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="stats.html">Stats</a></li>
+                <li><a class="nav-cta" href="files/CV_Achraf_Trabelsi_Resume_EN.pdf" download>Resume ↓</a></li>
+                <li><a class="nav-cta" href="files/CV_Achraf_Trabelsi_Complete_EN.pdf" download>Full CV ↓</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="section">
+            <p class="eyebrow">// stats</p>
+            <h2 class="section-title">App Stats</h2>
+            <p class="stats-intro">Download numbers for my personal iOS apps, straight from Apple's
+                sales reports — exact figures, refreshed daily.</p>
+
+            <div class="stats-summary" id="statsSummary" hidden>
+                <span class="stats-total" id="statsTotal"></span>
+                <span class="stats-updated" id="statsUpdated"></span>
+            </div>
+
+            <div class="stats-grid" id="statsGrid"></div>
+
+            <p class="stats-error" id="statsError" hidden>Stats are temporarily unavailable — please
+                check back later.</p>
+
+            <p class="stats-note">Numbers come from Apple's Sales &amp; Trends reports: exact download
+                counts (not the opt-in Analytics samples), with ~24&nbsp;h latency. Re-downloads and
+                updates are not counted as downloads.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="contact">
+        <h2 class="footer-title">Get in touch</h2>
+        <p>Happy to chat about iOS, AI-assisted development and tech leadership.</p>
+        <div class="footer-links">
+            <a href="mailto:trabelsiachraf.mobile@gmail.com">trabelsiachraf.mobile@gmail.com</a>
+            <a href="https://github.com/TrabelsiAchraf" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/achraf-trabelsi-83148156/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://twitter.com/Tr_Achraf" target="_blank" rel="noopener">Twitter</a>
+        </div>
+        <p class="footer-copy">Achraf Trabelsi © <span id="year"></span> · Paris, France</p>
+    </footer>
+
+    <script src="js/index.js?v=5"></script>
+    <script src="js/stats.js?v=1"></script>
+</body>
+
+</html>
