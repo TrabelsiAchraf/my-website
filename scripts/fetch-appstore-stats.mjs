@@ -7,6 +7,7 @@ import { createClient } from "./lib/asc-client.mjs";
 import { parseSalesReport } from "./lib/sales-parser.mjs";
 import { buildStats } from "./lib/stats-builder.mjs";
 import { daysAgo, monthsAgo } from "./lib/dates.mjs";
+import { ensureReportRequest, latestActiveDevices } from "./lib/asc-analytics.mjs";
 
 const OUTPUT_PATH = "data/appstore-stats.json";
 const MAX_MONTHS_BACK = 120;
@@ -25,7 +26,12 @@ export async function lookupIcons(ids, fetchImpl = fetch) {
     }
 }
 
-export async function collectStats({ client, vendorNumber, today, lookupIcons: lookup = lookupIcons }) {
+async function defaultFetchActiveDevices(client, appId) {
+    const requestId = await ensureReportRequest(client, appId);
+    return requestId === null ? null : latestActiveDevices(client, requestId);
+}
+
+export async function collectStats({ client, vendorNumber, today, lookupIcons: lookup = lookupIcons, fetchActiveDevices = defaultFetchActiveDevices }) {
     const apps = await client.listApps();
     const icons = await lookup(apps.map((a) => a.id));
 
@@ -44,11 +50,22 @@ export async function collectStats({ client, vendorNumber, today, lookupIcons: l
         if (tsv !== null) dailyRows.push(...parseSalesReport(tsv));
     }
 
+    const activeDevicesByApp = new Map();
+    for (const app of apps) {
+        try {
+            const value = await fetchActiveDevices(client, app.id);
+            if (value !== null) activeDevicesByApp.set(app.id, value);
+        } catch (error) {
+            console.warn(`analytics unavailable for ${app.name}: ${error.message}`);
+        }
+    }
+
     return buildStats({
         apps: apps.map((app) => ({ ...app, iconUrl: icons.get(app.id) ?? null })),
         monthlyRows,
         dailyRows,
         today,
+        activeDevicesByApp,
     });
 }
 

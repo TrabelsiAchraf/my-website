@@ -23,11 +23,13 @@ test("collectStats assembles apps, monthly history and daily window", async () =
     vendorNumber: "88888888",
     today: "2026-08-10",
     lookupIcons: async () => new Map([["111", "https://icon.png/100x100bb.jpg"]]),
+    fetchActiveDevices: async (client, appId) => (appId === "111" ? 31 : null),
   });
 
   assert.equal(stats.apps[0].downloads.total, 103); // 100 monthly + 3 current-month daily
   assert.equal(stats.apps[0].iconUrl, "https://icon.png/100x100bb.jpg");
   assert.equal(stats.apps[0].downloads.daily.length, 90);
+  assert.equal(stats.apps[0].activeDevices, 31);
 
   // Monthly probing stops after 6 consecutive 404s: 2026-07 hit,
   // then 2026-06 ... 2026-01 are misses -> 7 monthly calls total.
@@ -50,4 +52,19 @@ test("lookupIcons maps trackId to artwork URL via iTunes lookup", async () => {
 test("lookupIcons returns an empty map on failure instead of throwing", async () => {
   const icons = await lookupIcons(["111"], async () => new Response("nope", { status: 500 }));
   assert.equal(icons.size, 0);
+});
+
+test("analytics failure degrades to null without failing the run", async () => {
+  const client = {
+    listApps: async () => [{ id: "111", name: "Adhkar", bundleId: "com.x.adhkar" }],
+    salesReport: async () => null,
+  };
+  const stats = await collectStats({
+    client,
+    vendorNumber: "88888888",
+    today: "2026-08-10",
+    lookupIcons: async () => new Map(),
+    fetchActiveDevices: async () => { throw new Error("analytics down"); },
+  });
+  assert.equal(stats.apps[0].activeDevices, null);
 });
