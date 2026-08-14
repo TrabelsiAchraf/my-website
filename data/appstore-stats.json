@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-08-13T14:50:11.952Z",
+  "lastUpdated": "2026-08-14T14:44:07.882Z",
   "totals": {
-    "downloads": 131
+    "downloads": 132
   },
   "apps": [
     {
@@ -10,14 +10,10 @@
       "bundleId": "com.tadevv.SaltScan",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/76/c1/fd/76c1fd5e-932d-7dc4-904a-fe8384164d64/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
       "downloads": {
-        "total": 102,
-        "last7Days": 3,
-        "last30Days": 12,
+        "total": 103,
+        "last7Days": 4,
+        "last30Days": 13,
         "daily": [
-          {
-            "date": "2026-05-15",
-            "units": 0
-          },
           {
             "date": "2026-05-16",
             "units": 0
@@ -373,6 +369,10 @@
           {
             "date": "2026-08-12",
             "units": 1
+          },
+          {
+            "date": "2026-08-13",
+            "units": 1
           }
         ]
       },
@@ -380,14 +380,14 @@
         "total": 14
       },
       "devices": {
-        "iPhone": 84,
+        "iPhone": 85,
         "Desktop": 12,
         "iPad": 6
       },
       "countries": {
         "US": 32,
         "GB": 29,
-        "FR": 9,
+        "FR": 10,
         "CA": 7,
         "AU": 4,
         "SA": 2,
@@ -418,13 +418,9 @@
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9b/19/29/9b192967-9ef0-50cc-3597-5776cb919638/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
       "downloads": {
         "total": 25,
-        "last7Days": 1,
+        "last7Days": 0,
         "last30Days": 11,
         "daily": [
-          {
-            "date": "2026-05-15",
-            "units": 0
-          },
           {
             "date": "2026-05-16",
             "units": 0
@@ -780,6 +776,10 @@
           {
             "date": "2026-08-12",
             "units": 0
+          },
+          {
+            "date": "2026-08-13",
+            "units": 0
           }
         ]
       },
@@ -818,10 +818,6 @@
         "last7Days": 0,
         "last30Days": 0,
         "daily": [
-          {
-            "date": "2026-05-15",
-            "units": 0
-          },
           {
             "date": "2026-05-16",
             "units": 0
@@ -1176,6 +1172,10 @@
           },
           {
             "date": "2026-08-12",
+            "units": 0
+          },
+          {
+            "date": "2026-08-13",
             "units": 0
           }
         ]
