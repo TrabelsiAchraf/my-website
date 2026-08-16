@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-08-15T14:12:12.978Z",
+  "lastUpdated": "2026-08-16T14:13:10.642Z",
   "totals": {
-    "downloads": 133
+    "downloads": 134
   },
   "apps": [
     {
@@ -14,10 +14,6 @@
         "last7Days": 4,
         "last30Days": 14,
         "daily": [
-          {
-            "date": "2026-05-17",
-            "units": 1
-          },
           {
             "date": "2026-05-18",
             "units": 1
@@ -373,6 +369,10 @@
           {
             "date": "2026-08-14",
             "units": 1
+          },
+          {
+            "date": "2026-08-15",
+            "units": 0
           }
         ]
       },
@@ -417,14 +417,10 @@
       "bundleId": "com.tadevv.munajat",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9b/19/29/9b192967-9ef0-50cc-3597-5776cb919638/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
       "downloads": {
-        "total": 25,
-        "last7Days": 0,
-        "last30Days": 10,
+        "total": 26,
+        "last7Days": 1,
+        "last30Days": 11,
         "daily": [
-          {
-            "date": "2026-05-17",
-            "units": 0
-          },
           {
             "date": "2026-05-18",
             "units": 0
@@ -780,6 +776,10 @@
           {
             "date": "2026-08-14",
             "units": 0
+          },
+          {
+            "date": "2026-08-15",
+            "units": 1
           }
         ]
       },
@@ -787,12 +787,12 @@
         "total": 0
       },
       "devices": {
-        "iPhone": 21,
+        "iPhone": 22,
         "iPad": 2,
         "Desktop": 2
       },
       "countries": {
-        "SN": 8,
+        "SN": 9,
         "FR": 6,
         "US": 4,
         "CA": 1,
@@ -818,10 +818,6 @@
         "last7Days": 0,
         "last30Days": 0,
         "daily": [
-          {
-            "date": "2026-05-17",
-            "units": 0
-          },
           {
             "date": "2026-05-18",
             "units": 0
@@ -1176,6 +1172,10 @@
           },
           {
             "date": "2026-08-14",
+            "units": 0
+          },
+          {
+            "date": "2026-08-15",
             "units": 0
           }
         ]
