@@ -39,18 +39,30 @@ if ("IntersectionObserver" in window) {
     revealed.forEach((el) => el.classList.add("visible"));
 }
 
-// Hidden entry to the stats page: 6 quick taps on the home avatar
+// Hidden entry to the Mario game: type "mario" anywhere
+let typed = "";
+document.addEventListener("keydown", (event) => {
+    typed = (typed + event.key.toLowerCase()).slice(-5);
+    if (typed === "mario") {
+        window.location.href = "games/mario/";
+    }
+});
+
+// Hidden entries: 6 quick taps on an element
 // (counter resets if more than 1.5s passes between taps)
-const avatar = document.querySelector(".hero-avatar");
-if (avatar) {
+function tapSecret(selector, url) {
+    const el = document.querySelector(selector);
+    if (!el) return;
     let taps = 0;
     let lastTap = 0;
-    avatar.addEventListener("click", () => {
+    el.addEventListener("click", () => {
         const now = Date.now();
         taps = now - lastTap > 1500 ? 1 : taps + 1;
         lastTap = now;
         if (taps >= 6) {
-            window.location.href = "stats.html";
+            window.location.href = url;
         }
     });
 }
+tapSecret(".hero-avatar", "stats.html"); // stats page
+tapSecret(".footer-copy", "games/mario/"); // Mario game (mobile-friendly)
