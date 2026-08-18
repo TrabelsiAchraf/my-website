@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-08-17T14:17:15.059Z",
+  "lastUpdated": "2026-08-18T14:22:44.033Z",
   "totals": {
-    "downloads": 134
+    "downloads": 137
   },
   "apps": [
     {
@@ -10,14 +10,10 @@
       "bundleId": "com.tadevv.SaltScan",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/76/c1/fd/76c1fd5e-932d-7dc4-904a-fe8384164d64/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
       "downloads": {
-        "total": 104,
-        "last7Days": 4,
-        "last30Days": 14,
+        "total": 105,
+        "last7Days": 5,
+        "last30Days": 15,
         "daily": [
-          {
-            "date": "2026-05-19",
-            "units": 2
-          },
           {
             "date": "2026-05-20",
             "units": 2
@@ -373,6 +369,10 @@
           {
             "date": "2026-08-16",
             "units": 0
+          },
+          {
+            "date": "2026-08-17",
+            "units": 1
           }
         ]
       },
@@ -380,13 +380,13 @@
         "total": 14
       },
       "devices": {
-        "iPhone": 86,
+        "iPhone": 87,
         "Desktop": 12,
         "iPad": 6
       },
       "countries": {
         "US": 32,
-        "GB": 30,
+        "GB": 31,
         "FR": 10,
         "CA": 7,
         "AU": 4,
@@ -421,10 +421,6 @@
         "last7Days": 1,
         "last30Days": 11,
         "daily": [
-          {
-            "date": "2026-05-19",
-            "units": 0
-          },
           {
             "date": "2026-05-20",
             "units": 0
@@ -780,6 +776,10 @@
           {
             "date": "2026-08-16",
             "units": 0
+          },
+          {
+            "date": "2026-08-17",
+            "units": 0
           }
         ]
       },
@@ -814,14 +814,10 @@
       "bundleId": "com.achraftrabelsi.MirrorKit",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/15/ae/50/15ae507a-a4cb-7852-e60a-db6b9fada1eb/AppIcon-0-0-85-220-0-5-0-2x-sRGB.png/100x100bb.png",
       "downloads": {
-        "total": 4,
-        "last7Days": 0,
-        "last30Days": 0,
+        "total": 6,
+        "last7Days": 2,
+        "last30Days": 2,
         "daily": [
-          {
-            "date": "2026-05-19",
-            "units": 0
-          },
           {
             "date": "2026-05-20",
             "units": 0
@@ -1177,6 +1173,10 @@
           {
             "date": "2026-08-16",
             "units": 0
+          },
+          {
+            "date": "2026-08-17",
+            "units": 2
           }
         ]
       },
@@ -1184,12 +1184,13 @@
         "total": 0
       },
       "devices": {
-        "Desktop": 4
+        "Desktop": 6
       },
       "countries": {
         "TN": 2,
-        "US": 1,
+        "US": 2,
         "FR": 1,
+        "CA": 1,
         "DE": 0
       },
       "updates": {
