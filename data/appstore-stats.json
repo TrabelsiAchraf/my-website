@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-19T14:22:46.800Z",
+  "lastUpdated": "2026-08-20T14:25:09.173Z",
   "totals": {
     "downloads": 141
   },
@@ -11,13 +11,9 @@
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/76/c1/fd/76c1fd5e-932d-7dc4-904a-fe8384164d64/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
       "downloads": {
         "total": 106,
-        "last7Days": 5,
+        "last7Days": 4,
         "last30Days": 16,
         "daily": [
-          {
-            "date": "2026-05-21",
-            "units": 1
-          },
           {
             "date": "2026-05-22",
             "units": 0
@@ -373,6 +369,10 @@
           {
             "date": "2026-08-18",
             "units": 1
+          },
+          {
+            "date": "2026-08-19",
+            "units": 0
           }
         ]
       },
@@ -421,10 +421,6 @@
         "last7Days": 2,
         "last30Days": 12,
         "daily": [
-          {
-            "date": "2026-05-21",
-            "units": 0
-          },
           {
             "date": "2026-05-22",
             "units": 0
@@ -780,6 +776,10 @@
           {
             "date": "2026-08-18",
             "units": 1
+          },
+          {
+            "date": "2026-08-19",
+            "units": 0
           }
         ]
       },
@@ -818,10 +818,6 @@
         "last7Days": 4,
         "last30Days": 4,
         "daily": [
-          {
-            "date": "2026-05-21",
-            "units": 0
-          },
           {
             "date": "2026-05-22",
             "units": 0
@@ -1177,6 +1173,10 @@
           {
             "date": "2026-08-18",
             "units": 2
+          },
+          {
+            "date": "2026-08-19",
+            "units": 0
           }
         ]
       },
