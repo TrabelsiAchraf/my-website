@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-08-20T14:25:09.173Z",
+  "lastUpdated": "2026-08-21T14:24:28.245Z",
   "totals": {
-    "downloads": 141
+    "downloads": 142
   },
   "apps": [
     {
@@ -11,13 +11,9 @@
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/76/c1/fd/76c1fd5e-932d-7dc4-904a-fe8384164d64/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
       "downloads": {
         "total": 106,
-        "last7Days": 4,
+        "last7Days": 3,
         "last30Days": 16,
         "daily": [
-          {
-            "date": "2026-05-22",
-            "units": 0
-          },
           {
             "date": "2026-05-23",
             "units": 2
@@ -373,6 +369,10 @@
           {
             "date": "2026-08-19",
             "units": 0
+          },
+          {
+            "date": "2026-08-20",
+            "units": 0
           }
         ]
       },
@@ -421,10 +421,6 @@
         "last7Days": 2,
         "last30Days": 12,
         "daily": [
-          {
-            "date": "2026-05-22",
-            "units": 0
-          },
           {
             "date": "2026-05-23",
             "units": 0
@@ -780,11 +776,15 @@
           {
             "date": "2026-08-19",
             "units": 0
+          },
+          {
+            "date": "2026-08-20",
+            "units": 0
           }
         ]
       },
       "redownloads": {
-        "total": 0
+        "total": 1
       },
       "devices": {
         "iPhone": 23,
@@ -814,14 +814,10 @@
       "bundleId": "com.achraftrabelsi.MirrorKit",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/15/ae/50/15ae507a-a4cb-7852-e60a-db6b9fada1eb/AppIcon-0-0-85-220-0-5-0-2x-sRGB.png/100x100bb.png",
       "downloads": {
-        "total": 8,
-        "last7Days": 4,
-        "last30Days": 4,
+        "total": 9,
+        "last7Days": 5,
+        "last30Days": 5,
         "daily": [
-          {
-            "date": "2026-05-22",
-            "units": 0
-          },
           {
             "date": "2026-05-23",
             "units": 0
@@ -1177,6 +1173,10 @@
           {
             "date": "2026-08-19",
             "units": 0
+          },
+          {
+            "date": "2026-08-20",
+            "units": 1
           }
         ]
       },
@@ -1184,13 +1184,14 @@
         "total": 0
       },
       "devices": {
-        "Desktop": 8
+        "Desktop": 9
       },
       "countries": {
         "TN": 2,
         "US": 2,
         "DE": 1,
         "FR": 1,
+        "BE": 1,
         "ES": 1,
         "CA": 1
       },
