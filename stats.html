@@ -9,7 +9,7 @@
         content="Live download numbers for Achraf Trabelsi's personal iOS apps — exact figures from Apple's sales reports, refreshed daily.">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-    <link rel="stylesheet" href="css/style.css?v=6">
+    <link rel="stylesheet" href="css/style.css?v=12">
     <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 
@@ -38,23 +38,97 @@
             <p class="eyebrow">// stats</p>
             <h2 class="section-title">App Stats</h2>
             <p class="stats-intro">Download numbers for my personal iOS apps, straight from Apple's
-                sales reports — exact figures, refreshed daily.</p>
+                Sales &amp; Trends reports — exact figures, refreshed daily. Every number has an
+                <span class="info-dot info-dot-inline" aria-hidden="true">i</span> next to it: tap it for a
+                plain-English explanation, or read the full <a href="#glossary">glossary</a> at the bottom.</p>
 
-            <div class="stats-summary" id="statsSummary" hidden>
-                <span class="stats-total" id="statsTotal"></span>
-                <span class="stats-updated" id="statsUpdated"></span>
-            </div>
+            <p class="stats-updated" id="statsUpdated" hidden></p>
 
             <div class="stats-grid" id="statsGrid"></div>
 
             <p class="stats-error" id="statsError" hidden>Stats are temporarily unavailable — please
                 check back later.</p>
 
-            <p class="stats-note">Numbers come from Apple's Sales &amp; Trends reports: exact download
-                counts (not the opt-in Analytics samples), with ~24&nbsp;h latency. Re-downloads and
-                updates are not counted as downloads.</p>
+            <section class="glossary" id="glossary">
+                <h3 class="stats-section-title">What these numbers mean</h3>
+                <dl class="glossary-list">
+                    <dt>First-time downloads</dt>
+                    <dd>People who installed the app for the very first time on their Apple ID.
+                        Reinstalls and updates are counted separately, so this number never double-counts
+                        the same user.</dd>
+
+                    <dt>Last 7 days / Last 30 days</dt>
+                    <dd>First-time downloads over the 7 (or 30) most recent days Apple has published.
+                        Apple's reports run about 24&nbsp;h behind, so "today" is never included. The 30-day
+                        figure is the one to trust for a trend — at these volumes the 7-day figure swings
+                        on a single download.</dd>
+
+                    <dt>vs previous 7d</dt>
+                    <dd>The last 7 days compared with the 7 days before them. ▲ means picking up,
+                        ▼ means slowing down, "new" means there was nothing to compare against.</dd>
+
+                    <dt>Monthly downloads (All time)</dt>
+                    <dd>One bar per calendar month since release, rebuilt from Apple's monthly sales
+                        reports — the full history, well beyond the 90-day window. The last bar is the
+                        month in progress and is shown faded, since it is still filling up. The bars add
+                        up exactly to the all-time total.</dd>
+
+                    <dt>Released / Current version</dt>
+                    <dd>Read live from Apple's public storefront: the day the first version shipped, and
+                        the version on sale today with its release date.</dd>
+
+                    <dt>Daily downloads chart</dt>
+                    <dd>One point per day over the last 90 days. Hover the chart — or drag a finger
+                        across it on a phone — to read the exact count for any day.</dd>
+
+                    <dt>Updates installed</dt>
+                    <dd>How many times an existing user installed a newer version of the app. These are
+                        <em>not</em> new users: it is a retention signal — people who still have the app on
+                        their device and keep it current. An app that has never shipped a second version
+                        shows 0.</dd>
+
+                    <dt>Re-downloads</dt>
+                    <dd>Installs by an Apple ID that had already downloaded the app before: a second
+                        device, a restored backup, or a reinstall after deleting it. Apple reports them
+                        separately from downloads.</dd>
+
+                    <dt>Active devices</dt>
+                    <dd>Devices that opened the app recently, from Apple's App&nbsp;Analytics. It only
+                        covers users who agreed to share analytics with developers, and Apple withholds it
+                        entirely for low-traffic apps — hence "not published by Apple" on most cards.</dd>
+
+                    <dt>Devices</dt>
+                    <dd>Which device the download came from. "Desktop" means a Mac — either a Mac App
+                        Store download, or an iPhone/iPad app installed on Apple&nbsp;Silicon.</dd>
+
+                    <dt>Countries</dt>
+                    <dd>The App Store storefront the download came from. That follows the buyer's Apple ID
+                        country, not necessarily where they physically are.</dd>
+                </dl>
+            </section>
+
+            <p class="stats-note">Source: Apple's Sales &amp; Trends reports — exact download counts, not the
+                opt-in Analytics samples — pulled every morning by a
+                <a href="https://github.com/TrabelsiAchraf/my-website/blob/master/.github/workflows/appstore-stats.yml"
+                    target="_blank" rel="noopener">GitHub Action</a>, with ~24&nbsp;h latency. No revenue figures:
+                the apps are free.</p>
+
         </section>
     </main>
+
+    <div class="stats-toast" id="statsToast" role="status" aria-live="polite" hidden></div>
+
+    <dialog class="stats-dialog" id="countryDialog" aria-labelledby="countryDialogTitle">
+        <div class="dialog-head">
+            <div>
+                <h3 class="dialog-title" id="countryDialogTitle"></h3>
+                <p class="dialog-sub" id="countryDialogSub"></p>
+            </div>
+            <button class="dialog-close" id="countryDialogClose" type="button" aria-label="Close">✕</button>
+        </div>
+        <ul class="bar-list dialog-list" id="countryDialogList"></ul>
+    </dialog>
+
 
     <footer class="site-footer" id="contact">
         <h2 class="footer-title">Get in touch</h2>
@@ -69,7 +143,7 @@
     </footer>
 
     <script src="js/index.js?v=9"></script>
-    <script src="js/stats.js?v=1"></script>
+    <script src="js/stats.js?v=4"></script>
 </body>
 
 </html>

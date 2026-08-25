@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { daysAgo, monthsAgo } from "./dates.mjs";
+import { daysAgo, monthsAgo, monthRange } from "./dates.mjs";
 import { buildStats } from "./stats-builder.mjs";
 
 test("daysAgo and monthsAgo cross month/year boundaries", () => {
@@ -124,4 +124,58 @@ test("activeDevicesByApp is wired through", () => {
     activeDevicesByApp: new Map([["111", 31]]),
   });
   assert.equal(stats.apps[0].activeDevices, 31);
+});
+
+test("monthRange walks month by month across a year boundary", () => {
+  assert.deepEqual([...monthRange("2025-11", "2026-02")], ["2025-11", "2025-12", "2026-01", "2026-02"]);
+  assert.deepEqual([...monthRange("2026-03", "2026-03")], ["2026-03"]);
+});
+
+test("monthly series is zero-filled from the first month with data to the current month", () => {
+  const stats = buildStats({
+    apps: [APP],
+    monthlyRows: [
+      row({ date: "2026-05-01", units: 12 }),
+      row({ date: "2026-07-01", units: 30 }), // June has no downloads -> must appear as 0
+    ],
+    dailyRows: [row({ date: "2026-08-09", units: 3 })],
+    today: "2026-08-10",
+  });
+  assert.deepEqual(stats.apps[0].monthly, [
+    { month: "2026-05", units: 12 },
+    { month: "2026-06", units: 0 },
+    { month: "2026-07", units: 30 },
+    { month: "2026-08", units: 3 },
+  ]);
+});
+
+test("monthly series sums back to the all-time total, with no double counting", () => {
+  const stats = buildStats({
+    apps: [APP],
+    monthlyRows: [row({ date: "2026-07-01", units: 100 })],
+    // July daily is already inside July's monthly report; August is not.
+    dailyRows: [row({ date: "2026-07-20", units: 5 }), row({ date: "2026-08-09", units: 3 })],
+    today: "2026-08-10",
+  });
+  const app = stats.apps[0];
+  assert.equal(app.monthly.reduce((s, m) => s + m.units, 0), app.downloads.total);
+  assert.deepEqual(app.monthly, [{ month: "2026-07", units: 100 }, { month: "2026-08", units: 3 }]);
+});
+
+test("monthly series excludes updates and redownloads, and is empty with no data", () => {
+  const stats = buildStats({
+    apps: [APP],
+    monthlyRows: [row({ date: "2026-07-01", units: 10, productType: "7T" })],
+    dailyRows: [row({ units: 4, productType: "3" })],
+    today: "2026-08-10",
+  });
+  assert.deepEqual(stats.apps[0].monthly, []);
+});
+
+test("storefront metadata is passed through, defaulting to null", () => {
+  const withMeta = { ...APP, meta: { version: "0.3.0", genre: "Health & Fitness" } };
+  const stats = buildStats({ apps: [withMeta, { id: "222", name: "Wobli" }], monthlyRows: [], dailyRows: [], today: "2026-08-10" });
+  const byName = Object.fromEntries(stats.apps.map((a) => [a.name, a]));
+  assert.equal(byName.Adhkar.meta.version, "0.3.0");
+  assert.equal(byName.Wobli.meta, null);
 });

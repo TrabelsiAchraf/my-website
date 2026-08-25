@@ -20,3 +20,12 @@ export function* dateRange(startIso, endIso) {
         d.setUTCDate(d.getUTCDate() + 1);
     }
 }
+
+export function* monthRange(startMonth, endMonth) {
+    const d = new Date(`${startMonth}-01T00:00:00Z`);
+    const stop = new Date(`${endMonth}-01T00:00:00Z`);
+    while (d <= stop) {
+        yield d.toISOString().slice(0, 7);
+        d.setUTCMonth(d.getUTCMonth() + 1);
+    }
+}

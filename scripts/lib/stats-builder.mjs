@@ -1,7 +1,7 @@
 // Turns parsed sales rows into the published stats JSON (see design spec).
 
 import { classifyProductType } from "./sales-parser.mjs";
-import { daysAgo, dateRange } from "./dates.mjs";
+import { daysAgo, dateRange, monthRange } from "./dates.mjs";
 
 function sumByApp(rows, category) {
     const totals = new Map();
@@ -31,6 +31,21 @@ function dailyDownloadSeries(rows, appleId, start, end) {
     return [...dateRange(start, end)].map((date) => ({ date, units: byDate.get(date) ?? 0 }));
 }
 
+// Downloads per calendar month, from the app's first month with data through
+// `lastMonth`, zero-filled. Fed by the same rows as the all-time total, so the
+// series always sums back to `downloads.total`.
+function monthlyDownloadSeries(rows, appleId, lastMonth) {
+    const byMonth = new Map();
+    for (const r of rows) {
+        if (r.appleId !== appleId || classifyProductType(r.productType) !== "download") continue;
+        const month = r.date.slice(0, 7);
+        byMonth.set(month, (byMonth.get(month) ?? 0) + r.units);
+    }
+    if (byMonth.size === 0) return [];
+    const first = [...byMonth.keys()].sort()[0];
+    return [...monthRange(first, lastMonth)].map((month) => ({ month, units: byMonth.get(month) ?? 0 }));
+}
+
 export function buildStats({ apps, monthlyRows, dailyRows, today, activeDevicesByApp = new Map() }) {
     const end = daysAgo(today, 1);
     const start = daysAgo(today, 90);
@@ -58,6 +73,7 @@ export function buildStats({ apps, monthlyRows, dailyRows, today, activeDevicesB
             name: app.name,
             bundleId: app.bundleId,
             iconUrl: app.iconUrl,
+            meta: app.meta ?? null,
             downloads: {
                 total: (monthlyDownloads.get(app.id) ?? 0) + (uncoveredDownloads.get(app.id) ?? 0),
                 last7Days: windowSum(7),
@@ -69,6 +85,7 @@ export function buildStats({ apps, monthlyRows, dailyRows, today, activeDevicesB
             },
             devices: sumByField(countedRows, app.id, "download", "device"),
             countries: sumByField(countedRows, app.id, "download", "country"),
+            monthly: monthlyDownloadSeries(countedRows, app.id, today.slice(0, 7)),
             updates: { total: sumByApp(countedRows, "update").get(app.id) ?? 0 },
             activeDevices: activeDevicesByApp.get(app.id) ?? null,
         };

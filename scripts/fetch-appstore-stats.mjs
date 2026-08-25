@@ -14,13 +14,28 @@ const MAX_MONTHS_BACK = 120;
 const STOP_AFTER_CONSECUTIVE_MISSES = 6;
 const DAILY_WINDOW_DAYS = 90;
 
-export async function lookupIcons(ids, fetchImpl = fetch) {
+// Public storefront metadata: icon, release date, current version, category…
+// One request for every app; degrades to an empty map so a lookup outage can
+// never fail the run (the cards render fine without it).
+export async function lookupAppMetadata(ids, fetchImpl = fetch) {
     if (ids.length === 0) return new Map();
     try {
         const res = await fetchImpl(`https://itunes.apple.com/lookup?id=${ids.join(",")}`);
         if (!res.ok) return new Map();
         const { results } = await res.json();
-        return new Map(results.map((r) => [String(r.trackId), r.artworkUrl100]));
+        return new Map(results.map((r) => [String(r.trackId), {
+            iconUrl: r.artworkUrl100 ?? null,
+            releaseDate: r.releaseDate?.slice(0, 10) ?? null,
+            version: r.version ?? null,
+            versionDate: r.currentVersionReleaseDate?.slice(0, 10) ?? null,
+            genre: r.primaryGenreName ?? null,
+            languages: r.languageCodesISO2A ?? [],
+            minimumOsVersion: r.minimumOsVersion ?? null,
+            sizeBytes: Number(r.fileSizeBytes) || null,
+            // Shown only when there is at least one rating.
+            rating: r.averageUserRating ?? null,
+            ratingCount: r.userRatingCount ?? 0,
+        }]));
     } catch {
         return new Map();
     }
@@ -31,9 +46,9 @@ async function defaultFetchActiveDevices(client, appId) {
     return requestId === null ? null : latestActiveDevices(client, requestId);
 }
 
-export async function collectStats({ client, vendorNumber, today, lookupIcons: lookup = lookupIcons, fetchActiveDevices = defaultFetchActiveDevices }) {
+export async function collectStats({ client, vendorNumber, today, lookupMetadata = lookupAppMetadata, fetchActiveDevices = defaultFetchActiveDevices }) {
     const apps = await client.listApps();
-    const icons = await lookup(apps.map((a) => a.id));
+    const metadata = await lookupMetadata(apps.map((a) => a.id));
 
     const monthlyRows = [];
     let misses = 0;
@@ -61,7 +76,10 @@ export async function collectStats({ client, vendorNumber, today, lookupIcons: l
     }
 
     return buildStats({
-        apps: apps.map((app) => ({ ...app, iconUrl: icons.get(app.id) ?? null })),
+        apps: apps.map((app) => {
+            const meta = metadata.get(app.id) ?? null;
+            return { ...app, iconUrl: meta?.iconUrl ?? null, meta };
+        }),
         monthlyRows,
         dailyRows,
         today,
