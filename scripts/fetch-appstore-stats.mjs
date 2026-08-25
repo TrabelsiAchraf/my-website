@@ -3,7 +3,7 @@
 // Required env: ASC_ISSUER_ID, ASC_KEY_ID, ASC_PRIVATE_KEY, ASC_VENDOR_NUMBER.
 
 import { writeFile } from "node:fs/promises";
-import { createClient } from "./lib/asc-client.mjs";
+import { createClient, REPORT_GONE } from "./lib/asc-client.mjs";
 import { parseSalesReport } from "./lib/sales-parser.mjs";
 import { buildStats } from "./lib/stats-builder.mjs";
 import { daysAgo, monthsAgo } from "./lib/dates.mjs";
@@ -74,6 +74,8 @@ export async function collectStats({ client, vendorNumber, today, lookupMetadata
         const reportDate = monthsAgo(today, i);
         if (oldestMonth === null ? misses >= STOP_AFTER_CONSECUTIVE_MISSES : reportDate < oldestMonth) break;
         const tsv = await client.salesReport({ vendorNumber, frequency: "MONTHLY", reportDate });
+        // Past Apple's 12-month retention: every older month is gone too.
+        if (tsv === REPORT_GONE) break;
         if (tsv === null) { misses++; continue; }
         misses = 0;
         monthlyRows.push(...parseSalesReport(tsv));
@@ -82,6 +84,7 @@ export async function collectStats({ client, vendorNumber, today, lookupMetadata
     const dailyRows = [];
     for (let i = 1; i <= DAILY_WINDOW_DAYS; i++) {
         const tsv = await client.salesReport({ vendorNumber, frequency: "DAILY", reportDate: daysAgo(today, i) });
+        if (tsv === REPORT_GONE) break;
         if (tsv !== null) dailyRows.push(...parseSalesReport(tsv));
     }
 

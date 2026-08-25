@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
 import { gzipSync } from "node:zlib";
-import { makeToken, createClient } from "./asc-client.mjs";
+import { makeToken, createClient, REPORT_GONE } from "./asc-client.mjs";
 
 const { privateKey, publicKey } = crypto.generateKeyPairSync("ec", { namedCurve: "prime256v1" });
 const pem = privateKey.export({ type: "pkcs8", format: "pem" });
@@ -78,4 +78,10 @@ test("postJson sends the body with auth and content-type headers", async () => {
   assert.equal(captured.opts.headers["Content-Type"], "application/json");
   assert.match(captured.opts.headers.Authorization, /^Bearer /);
   assert.deepEqual(JSON.parse(captured.opts.body), { data: { type: "things" } });
+});
+
+test("410 is a retention boundary, not an error: salesReport returns REPORT_GONE", async () => {
+  const client = createClient(CREDS, async () => new Response("gone", { status: 410 }));
+  assert.equal(await client.salesReport({ vendorNumber: "1", frequency: "MONTHLY", reportDate: "2020-01" }), REPORT_GONE);
+  assert.equal(await client.getJson("/v1/whatever"), null);
 });

@@ -8,6 +8,11 @@ import { gunzipSync } from "node:zlib";
 const API_BASE = "https://api.appstoreconnect.apple.com";
 const RETRY_DELAY_MS = 30_000;
 
+// Apple keeps daily reports for 365 days, monthly for 12 months and yearly
+// indefinitely; asking for anything older answers 410. That is a boundary, not
+// a failure, so it gets its own sentinel rather than throwing.
+export const REPORT_GONE = Symbol("report-gone");
+
 export function makeToken({ issuerId, keyId, privateKey }, nowSeconds = Math.floor(Date.now() / 1000)) {
     const b64 = (obj) => Buffer.from(JSON.stringify(obj)).toString("base64url");
     const header = b64({ alg: "ES256", kid: keyId, typ: "JWT" });
@@ -25,6 +30,7 @@ export function createClient(credentials, fetchImpl = fetch) {
         for (let attempt = 0; ; attempt++) {
             const res = await fetchImpl(`${API_BASE}${path}`, options);
             if (res.status === 404) return null;
+            if (res.status === 410) return REPORT_GONE;
             if (res.status >= 500 && attempt === 0) {
                 await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
                 continue;
@@ -50,13 +56,13 @@ export function createClient(credentials, fetchImpl = fetch) {
                 "filter[vendorNumber]": vendorNumber,
             });
             const res = await request(`/v1/salesReports?${params}`);
-            if (res === null) return null;
+            if (res === null || res === REPORT_GONE) return res;
             return gunzipSync(Buffer.from(await res.arrayBuffer())).toString("utf8");
         },
 
         async getJson(path) {
             const res = await request(path);
-            return res === null ? null : res.json();
+            return res === null || res === REPORT_GONE ? null : res.json();
         },
 
         async postJson(path, body) {

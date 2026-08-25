@@ -2,6 +2,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { collectStats, lookupAppMetadata, earliestReleaseMonth } from "./fetch-appstore-stats.mjs";
+import { REPORT_GONE } from "./lib/asc-client.mjs";
 
 const HEADER = "Title\tProduct Type Identifier\tUnits\tBegin Date\tApple Identifier";
 const MONTHLY_TSV = [HEADER, "Adhkar\t1F\t100\t07/01/2026\t111"].join("\n");
@@ -150,4 +151,30 @@ test("without storefront metadata, the miss heuristic still bounds the walk", as
     fetchActiveDevices: async () => null,
   });
   assert.equal(probed.length, 7); // 2026-07 hit, then six misses
+});
+
+test("hitting Apple's retention boundary stops the walk instead of failing the run", async () => {
+  const probed = [];
+  const client = {
+    listApps: async () => [{ id: "111", name: "Adhkar", bundleId: "com.x.adhkar" }],
+    salesReport: async ({ frequency, reportDate }) => {
+      if (frequency !== "MONTHLY") return null;
+      probed.push(reportDate);
+      // Apple keeps 12 months of monthly reports; older ones answer 410.
+      if (reportDate < "2025-09") return REPORT_GONE;
+      return reportDate === "2026-07" ? MONTHLY_TSV : null;
+    },
+  };
+  const stats = await collectStats({
+    client,
+    vendorNumber: "88888888",
+    today: "2026-08-10",
+    // Release date is well past the retention window: the walk must stop at
+    // the boundary rather than keep asking for reports that are gone.
+    lookupMetadata: async () => new Map([["111", { releaseDate: "2023-04-01" }]]),
+    fetchActiveDevices: async () => null,
+  });
+  assert.equal(probed.at(-1), "2025-08"); // first GONE, then stop
+  assert.ok(!probed.includes("2025-07"));
+  assert.equal(stats.apps[0].downloads.total, 100); // run completes normally
 });
