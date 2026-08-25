@@ -11,6 +11,7 @@ import { ensureReportRequest, latestActiveDevices } from "./lib/asc-analytics.mj
 
 const OUTPUT_PATH = "data/appstore-stats.json";
 const MAX_MONTHS_BACK = 120;
+// Fallback only, for when the storefront lookup is unavailable (see monthly loop).
 const STOP_AFTER_CONSECUTIVE_MISSES = 6;
 const DAILY_WINDOW_DAYS = 90;
 
@@ -41,6 +42,15 @@ export async function lookupAppMetadata(ids, fetchImpl = fetch) {
     }
 }
 
+// The month the oldest app shipped, or null when no release date is known.
+export function earliestReleaseMonth(metadata) {
+    const months = [...metadata.values()]
+        .map((m) => m?.releaseDate?.slice(0, 7))
+        .filter(Boolean)
+        .sort();
+    return months[0] ?? null;
+}
+
 async function defaultFetchActiveDevices(client, appId) {
     const requestId = await ensureReportRequest(client, appId);
     return requestId === null ? null : latestActiveDevices(client, requestId);
@@ -50,10 +60,20 @@ export async function collectStats({ client, vendorNumber, today, lookupMetadata
     const apps = await client.listApps();
     const metadata = await lookupMetadata(apps.map((a) => a.id));
 
+    // Walk the MONTHLY reports backwards to the month the oldest app shipped.
+    // Apple serves nothing for a month with no sales, so a miss is ambiguous —
+    // it means either "no downloads that month" or "before the app existed".
+    // Counting misses to decide when to stop therefore truncates the history
+    // (and the all-time total) as soon as an app goes quiet for a few months.
+    // The release date makes the bound exact; the miss counter stays as a
+    // fallback for when the storefront lookup is unavailable.
+    const oldestMonth = earliestReleaseMonth(metadata);
     const monthlyRows = [];
     let misses = 0;
-    for (let i = 1; i <= MAX_MONTHS_BACK && misses < STOP_AFTER_CONSECUTIVE_MISSES; i++) {
-        const tsv = await client.salesReport({ vendorNumber, frequency: "MONTHLY", reportDate: monthsAgo(today, i) });
+    for (let i = 1; i <= MAX_MONTHS_BACK; i++) {
+        const reportDate = monthsAgo(today, i);
+        if (oldestMonth === null ? misses >= STOP_AFTER_CONSECUTIVE_MISSES : reportDate < oldestMonth) break;
+        const tsv = await client.salesReport({ vendorNumber, frequency: "MONTHLY", reportDate });
         if (tsv === null) { misses++; continue; }
         misses = 0;
         monthlyRows.push(...parseSalesReport(tsv));

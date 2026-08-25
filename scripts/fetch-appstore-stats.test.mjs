@@ -1,7 +1,7 @@
 // scripts/fetch-appstore-stats.test.mjs
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { collectStats, lookupAppMetadata } from "./fetch-appstore-stats.mjs";
+import { collectStats, lookupAppMetadata, earliestReleaseMonth } from "./fetch-appstore-stats.mjs";
 
 const HEADER = "Title\tProduct Type Identifier\tUnits\tBegin Date\tApple Identifier";
 const MONTHLY_TSV = [HEADER, "Adhkar\t1F\t100\t07/01/2026\t111"].join("\n");
@@ -31,9 +31,10 @@ test("collectStats assembles apps, monthly history and daily window", async () =
   assert.equal(stats.apps[0].downloads.daily.length, 90);
   assert.equal(stats.apps[0].activeDevices, 31);
 
-  // Monthly probing stops after 6 consecutive 404s: 2026-07 hit,
-  // then 2026-06 ... 2026-01 are misses -> 7 monthly calls total.
-  assert.equal(reportCalls.filter((c) => c.frequency === "MONTHLY").length, 7);
+  // The app shipped 2025-01, so monthly probing walks 2026-07 back to
+  // 2025-01 -> 19 calls, regardless of how many of them come back empty.
+  assert.equal(reportCalls.filter((c) => c.frequency === "MONTHLY").length, 19);
+  assert.equal(reportCalls.filter((c) => c.frequency === "MONTHLY").at(-1).reportDate, "2025-01");
   assert.equal(reportCalls.filter((c) => c.frequency === "DAILY").length, 90);
 });
 
@@ -90,4 +91,63 @@ test("analytics failure degrades to null without failing the run", async () => {
     fetchActiveDevices: async () => { throw new Error("analytics down"); },
   });
   assert.equal(stats.apps[0].activeDevices, null);
+});
+
+test("earliestReleaseMonth picks the oldest release, ignoring missing dates", () => {
+  assert.equal(earliestReleaseMonth(new Map([
+    ["1", { releaseDate: "2026-05-26" }],
+    ["2", { releaseDate: "2025-01-12" }],
+    ["3", null],
+    ["4", { releaseDate: null }],
+  ])), "2025-01");
+  assert.equal(earliestReleaseMonth(new Map()), null);
+  assert.equal(earliestReleaseMonth(new Map([["1", { releaseDate: null }]])), null);
+});
+
+test("a long quiet stretch no longer truncates the monthly history", async () => {
+  const probed = [];
+  const client = {
+    listApps: async () => [{ id: "111", name: "Adhkar", bundleId: "com.x.adhkar" }],
+    salesReport: async ({ frequency, reportDate }) => {
+      if (frequency !== "MONTHLY") return null;
+      probed.push(reportDate);
+      // Sales in the app's first month, then a 12-month drought, then sales again.
+      if (reportDate === "2025-01") return [HEADER, "Adhkar\t1F\t40\t01/01/2025\t111"].join("\n");
+      if (reportDate === "2026-07") return [HEADER, "Adhkar\t1F\t9\t07/01/2026\t111"].join("\n");
+      return null;
+    },
+  };
+  const stats = await collectStats({
+    client,
+    vendorNumber: "88888888",
+    today: "2026-08-10",
+    lookupMetadata: async () => new Map([["111", { releaseDate: "2025-01-12" }]]),
+    fetchActiveDevices: async () => null,
+  });
+
+  // The drought used to stop the walk after 6 misses, losing January 2025.
+  assert.ok(probed.includes("2025-01"), "must probe back to the release month");
+  assert.equal(stats.apps[0].downloads.total, 49); // 40 + 9, nothing lost
+  assert.deepEqual(stats.apps[0].monthly.at(0), { month: "2025-01", units: 40 });
+  assert.equal(stats.apps[0].monthly.length, 20); // 2025-01 .. 2026-08
+});
+
+test("without storefront metadata, the miss heuristic still bounds the walk", async () => {
+  const probed = [];
+  const client = {
+    listApps: async () => [{ id: "111", name: "Adhkar", bundleId: "com.x.adhkar" }],
+    salesReport: async ({ frequency, reportDate }) => {
+      if (frequency !== "MONTHLY") return null;
+      probed.push(reportDate);
+      return reportDate === "2026-07" ? MONTHLY_TSV : null;
+    },
+  };
+  await collectStats({
+    client,
+    vendorNumber: "88888888",
+    today: "2026-08-10",
+    lookupMetadata: async () => new Map(),
+    fetchActiveDevices: async () => null,
+  });
+  assert.equal(probed.length, 7); // 2026-07 hit, then six misses
 });
