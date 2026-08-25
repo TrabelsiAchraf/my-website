@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-08-24T14:32:02.408Z",
+  "lastUpdated": "2026-08-25T13:41:14.361Z",
   "totals": {
-    "downloads": 144
+    "downloads": 146
   },
   "apps": [
     {
@@ -9,15 +9,27 @@
       "name": "Salt Scan - Check Salt Levels",
       "bundleId": "com.tadevv.SaltScan",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/76/c1/fd/76c1fd5e-932d-7dc4-904a-fe8384164d64/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
+      "meta": {
+        "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/76/c1/fd/76c1fd5e-932d-7dc4-904a-fe8384164d64/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
+        "releaseDate": "2025-01-12",
+        "version": "0.3.0",
+        "versionDate": "2026-04-09",
+        "genre": "Health & Fitness",
+        "languages": [
+          "AR",
+          "EN",
+          "FR"
+        ],
+        "minimumOsVersion": "18.0",
+        "sizeBytes": 17090560,
+        "rating": 0,
+        "ratingCount": 0
+      },
       "downloads": {
-        "total": 107,
+        "total": 108,
         "last7Days": 3,
-        "last30Days": 16,
+        "last30Days": 17,
         "daily": [
-          {
-            "date": "2026-05-26",
-            "units": 2
-          },
           {
             "date": "2026-05-27",
             "units": 0
@@ -373,6 +385,10 @@
           {
             "date": "2026-08-23",
             "units": 0
+          },
+          {
+            "date": "2026-08-24",
+            "units": 1
           }
         ]
       },
@@ -380,13 +396,13 @@
         "total": 14
       },
       "devices": {
-        "iPhone": 89,
+        "iPhone": 90,
         "Desktop": 12,
         "iPad": 6
       },
       "countries": {
+        "GB": 33,
         "US": 32,
-        "GB": 32,
         "FR": 10,
         "CA": 7,
         "AU": 4,
@@ -407,6 +423,36 @@
         "CO": 1,
         "ES": 1
       },
+      "monthly": [
+        {
+          "month": "2026-02",
+          "units": 6
+        },
+        {
+          "month": "2026-03",
+          "units": 12
+        },
+        {
+          "month": "2026-04",
+          "units": 20
+        },
+        {
+          "month": "2026-05",
+          "units": 29
+        },
+        {
+          "month": "2026-06",
+          "units": 13
+        },
+        {
+          "month": "2026-07",
+          "units": 14
+        },
+        {
+          "month": "2026-08",
+          "units": 14
+        }
+      ],
       "updates": {
         "total": 37
       },
@@ -417,15 +463,25 @@
       "name": "Munajat — Dhikr & Dua",
       "bundleId": "com.tadevv.munajat",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9b/19/29/9b192967-9ef0-50cc-3597-5776cb919638/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
+      "meta": {
+        "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9b/19/29/9b192967-9ef0-50cc-3597-5776cb919638/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
+        "releaseDate": "2026-05-26",
+        "version": "1.0.0",
+        "versionDate": "2026-05-26",
+        "genre": "Lifestyle",
+        "languages": [
+          "EN"
+        ],
+        "minimumOsVersion": "18.4",
+        "sizeBytes": 5248000,
+        "rating": 0,
+        "ratingCount": 0
+      },
       "downloads": {
         "total": 28,
         "last7Days": 2,
-        "last30Days": 13,
+        "last30Days": 12,
         "daily": [
-          {
-            "date": "2026-05-26",
-            "units": 2
-          },
           {
             "date": "2026-05-27",
             "units": 2
@@ -781,11 +837,15 @@
           {
             "date": "2026-08-23",
             "units": 0
+          },
+          {
+            "date": "2026-08-24",
+            "units": 0
           }
         ]
       },
       "redownloads": {
-        "total": 1
+        "total": 2
       },
       "devices": {
         "iPhone": 24,
@@ -805,6 +865,24 @@
         "BJ": 1,
         "EG": 1
       },
+      "monthly": [
+        {
+          "month": "2026-05",
+          "units": 6
+        },
+        {
+          "month": "2026-06",
+          "units": 3
+        },
+        {
+          "month": "2026-07",
+          "units": 13
+        },
+        {
+          "month": "2026-08",
+          "units": 6
+        }
+      ],
       "updates": {
         "total": 0
       },
@@ -815,15 +893,23 @@
       "name": "MirrorKit",
       "bundleId": "com.achraftrabelsi.MirrorKit",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/15/ae/50/15ae507a-a4cb-7852-e60a-db6b9fada1eb/AppIcon-0-0-85-220-0-5-0-2x-sRGB.png/100x100bb.png",
+      "meta": {
+        "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/15/ae/50/15ae507a-a4cb-7852-e60a-db6b9fada1eb/AppIcon-0-0-85-220-0-5-0-2x-sRGB.png/100x100bb.png",
+        "releaseDate": "2026-04-24",
+        "version": "1.1.1",
+        "versionDate": "2026-04-29",
+        "genre": "Utilities",
+        "languages": [],
+        "minimumOsVersion": "14.0",
+        "sizeBytes": 985870,
+        "rating": 0,
+        "ratingCount": 0
+      },
       "downloads": {
-        "total": 9,
-        "last7Days": 5,
-        "last30Days": 5,
+        "total": 10,
+        "last7Days": 4,
+        "last30Days": 6,
         "daily": [
-          {
-            "date": "2026-05-26",
-            "units": 0
-          },
           {
             "date": "2026-05-27",
             "units": 0
@@ -1179,6 +1265,10 @@
           {
             "date": "2026-08-23",
             "units": 0
+          },
+          {
+            "date": "2026-08-24",
+            "units": 1
           }
         ]
       },
@@ -1186,17 +1276,40 @@
         "total": 0
       },
       "devices": {
-        "Desktop": 9
+        "Desktop": 10
       },
       "countries": {
         "TN": 2,
         "US": 2,
         "DE": 1,
         "FR": 1,
+        "DK": 1,
         "BE": 1,
         "ES": 1,
         "CA": 1
       },
+      "monthly": [
+        {
+          "month": "2026-04",
+          "units": 3
+        },
+        {
+          "month": "2026-05",
+          "units": 0
+        },
+        {
+          "month": "2026-06",
+          "units": 1
+        },
+        {
+          "month": "2026-07",
+          "units": 0
+        },
+        {
+          "month": "2026-08",
+          "units": 6
+        }
+      ],
       "updates": {
         "total": 4
       },
