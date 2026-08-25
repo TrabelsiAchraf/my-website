@@ -35,7 +35,7 @@ const GLOSSARY = {
     },
     monthly: {
         term: "Monthly downloads",
-        text: "One bar per calendar month since the app was released, rebuilt from Apple's monthly sales reports. The last bar is the month in progress, so it is still filling up. These bars add up exactly to the all-time total.",
+        text: "One bar per calendar month, rebuilt from Apple's monthly sales reports. The last bar is the month in progress, so it is still filling up. Apple only keeps monthly reports for 12 months — anything older is recovered from the yearly report, which has no month breakdown, so it is counted in the all-time total but shown as a note under the chart rather than as bars.",
     },
     released: {
         term: "Released",
@@ -344,11 +344,13 @@ function chartBlock(app) {
             build: () => seriesChart(daily.map((d) => ({ label: formatDay(d.date), units: d.units })), "line"),
         });
     }
+    const prior = app.downloads.priorToSeries ?? 0;
     if (monthly.length >= 3) {
         views.push({
             id: "monthly",
             tab: "All time",
-            caption: `Monthly downloads · since ${formatMonth(monthly[0].month)}`,
+            caption: `Monthly downloads · since ${formatMonth(monthly[0].month)}`
+                + (prior > 0 ? ` · +${formatNumber(prior)} before that` : ""),
             info: "monthly",
             build: () => seriesChart(monthly.map((m) => ({
                 label: formatMonth(m.month),

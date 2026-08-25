@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { daysAgo, monthsAgo, monthRange } from "./dates.mjs";
-import { buildStats } from "./stats-builder.mjs";
+import { buildStats, preRetentionRows } from "./stats-builder.mjs";
 
 test("daysAgo and monthsAgo cross month/year boundaries", () => {
   assert.equal(daysAgo("2026-08-10", 1), "2026-08-09");
@@ -178,4 +178,66 @@ test("storefront metadata is passed through, defaulting to null", () => {
   const byName = Object.fromEntries(stats.apps.map((a) => [a.name, a]));
   assert.equal(byName.Adhkar.meta.version, "0.3.0");
   assert.equal(byName.Wobli.meta, null);
+});
+
+test("a yearly report recovers the months Apple no longer serves, without double counting", () => {
+  const stats = buildStats({
+    apps: [APP],
+    // Apple only still serves Sep-Dec 2025 by month; Sep had 4, the rest nothing.
+    monthlyRows: [
+      row({ date: "2025-09-01", units: 4, device: "iPhone", country: "FR" }),
+      row({ date: "2026-07-01", units: 30, device: "iPhone", country: "US" }),
+    ],
+    // The 2025 yearly report says 26 for the whole year -> 22 happened in the
+    // months whose monthly reports are gone.
+    yearlyRows: [row({ date: "2025-01-01", units: 26, device: "iPhone", country: "FR" })],
+    dailyRows: [row({ date: "2026-08-09", units: 3, device: "iPad", country: "US" })],
+    today: "2026-08-10",
+  });
+  const app = stats.apps[0];
+  assert.equal(app.downloads.total, 4 + 30 + 3 + 22);
+  assert.equal(app.downloads.priorToSeries, 22);
+  // The recovered units have no month, so they stay out of the series...
+  assert.deepEqual(app.monthly.map((m) => m.units), [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 3]);
+  assert.equal(app.monthly[0].month, "2025-09");
+  // ...but they do belong in the splits.
+  assert.deepEqual(app.devices, { iPhone: 56, iPad: 3 });
+  assert.deepEqual(app.countries, { FR: 26, US: 33 });
+});
+
+test("a yearly report already covered month by month adds nothing", () => {
+  const stats = buildStats({
+    apps: [APP],
+    monthlyRows: [row({ date: "2025-09-01", units: 20 }), row({ date: "2025-10-01", units: 6 })],
+    yearlyRows: [row({ date: "2025-01-01", units: 26 })],
+    dailyRows: [],
+    today: "2026-08-10",
+  });
+  assert.equal(stats.apps[0].downloads.total, 26);
+  assert.equal(stats.apps[0].downloads.priorToSeries, 0);
+});
+
+test("recovered rows keep their category: updates and redownloads stay separate", () => {
+  const stats = buildStats({
+    apps: [APP],
+    monthlyRows: [],
+    yearlyRows: [
+      row({ date: "2025-01-01", units: 9 }),
+      row({ date: "2025-01-01", units: 5, productType: "7T" }),
+      row({ date: "2025-01-01", units: 2, productType: "3" }),
+    ],
+    dailyRows: [],
+    today: "2026-08-10",
+  });
+  const app = stats.apps[0];
+  assert.equal(app.downloads.total, 9);
+  assert.equal(app.updates.total, 5);
+  assert.equal(app.redownloads.total, 2);
+  assert.deepEqual(app.monthly, []); // nothing datable to a month
+});
+
+test("preRetentionRows never invents negative units when a year is over-reported", () => {
+  const counted = [row({ date: "2025-09-01", units: 30 })];
+  const yearly = [row({ date: "2025-01-01", units: 12 })];
+  assert.deepEqual(preRetentionRows(yearly, counted), []);
 });

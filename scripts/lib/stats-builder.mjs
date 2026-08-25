@@ -46,11 +46,52 @@ function monthlyDownloadSeries(rows, appleId, lastMonth) {
     return [...monthRange(first, lastMonth)].map((month) => ({ month, units: byMonth.get(month) ?? 0 }));
 }
 
-export function buildStats({ apps, monthlyRows, dailyRows, today, activeDevicesByApp = new Map() }) {
+// A representative product type per category, so a reconstructed row
+// classifies back to the category it came from.
+const REPRESENTATIVE_TYPE = { download: "1", redownload: "3", update: "7", other: "0" };
+
+// Yearly reports cover a whole year, including the months we already count
+// from monthly/daily reports. Subtracting what is already counted leaves only
+// what the retained window cannot see — Apple drops monthly reports after 12
+// months but keeps yearly ones forever. The remainder comes back as ordinary
+// rows so every aggregation below can consume it unchanged. They are dated to
+// the start of their year: the yearly report has no month granularity, which
+// is exactly why they must stay out of the monthly series.
+export function preRetentionRows(yearlyRows, countedRows) {
+    const keyOf = (r) => [
+        r.date.slice(0, 4),
+        r.appleId,
+        classifyProductType(r.productType),
+        r.device ?? "Unknown",
+        r.country ?? "Unknown",
+    ].join("|");
+    const totalsByKey = (rows) => {
+        const totals = new Map();
+        for (const r of rows) totals.set(keyOf(r), (totals.get(keyOf(r)) ?? 0) + r.units);
+        return totals;
+    };
+
+    const counted = totalsByKey(countedRows);
+    const extra = [];
+    for (const [key, units] of totalsByKey(yearlyRows)) {
+        const remainder = units - (counted.get(key) ?? 0);
+        if (remainder <= 0) continue;
+        const [year, appleId, category, device, country] = key.split("|");
+        extra.push({
+            appleId,
+            productType: REPRESENTATIVE_TYPE[category],
+            units: remainder,
+            date: `${year}-01-01`,
+            device,
+            country,
+        });
+    }
+    return extra;
+}
+
+export function buildStats({ apps, monthlyRows, dailyRows, yearlyRows = [], today, activeDevicesByApp = new Map() }) {
     const end = daysAgo(today, 1);
     const start = daysAgo(today, 90);
-    const monthlyDownloads = sumByApp(monthlyRows, "download");
-    const monthlyRedownloads = sumByApp(monthlyRows, "redownload");
     // Apple publishes a month's MONTHLY report ~5 days after that month ends,
     // so right after a month boundary the most recent completed month has no
     // monthly report yet. Rather than assuming "current month" is the only
@@ -59,11 +100,17 @@ export function buildStats({ apps, monthlyRows, dailyRows, today, activeDevicesB
     // comfortably covers the gap either way).
     const coveredMonths = new Set(monthlyRows.map((r) => r.date.slice(0, 7)));
     const uncoveredDailyRows = dailyRows.filter((r) => !coveredMonths.has(r.date.slice(0, 7)));
-    const uncoveredDownloads = sumByApp(uncoveredDailyRows, "download");
-    const uncoveredRedownloads = sumByApp(uncoveredDailyRows, "redownload");
 
-    // Reuse coverage logic for splits: count only rows that feed download/update totals
+    // Rows that feed the per-month series: everything Apple still reports by month.
     const countedRows = [...monthlyRows, ...uncoveredDailyRows];
+    // Plus the years only a yearly report can still reach.
+    const priorRows = preRetentionRows(yearlyRows, countedRows);
+    const allRows = [...countedRows, ...priorRows];
+
+    const totalDownloads = sumByApp(allRows, "download");
+    const totalRedownloads = sumByApp(allRows, "redownload");
+    const totalUpdates = sumByApp(allRows, "update");
+    const priorDownloads = sumByApp(priorRows, "download");
 
     const entries = apps.map((app) => {
         const daily = dailyDownloadSeries(dailyRows, app.id, start, end);
@@ -75,18 +122,21 @@ export function buildStats({ apps, monthlyRows, dailyRows, today, activeDevicesB
             iconUrl: app.iconUrl,
             meta: app.meta ?? null,
             downloads: {
-                total: (monthlyDownloads.get(app.id) ?? 0) + (uncoveredDownloads.get(app.id) ?? 0),
+                total: totalDownloads.get(app.id) ?? 0,
+                // Units from years whose monthly reports Apple no longer serves:
+                // real downloads, but with no month to attach them to.
+                priorToSeries: priorDownloads.get(app.id) ?? 0,
                 last7Days: windowSum(7),
                 last30Days: windowSum(30),
                 daily,
             },
             redownloads: {
-                total: (monthlyRedownloads.get(app.id) ?? 0) + (uncoveredRedownloads.get(app.id) ?? 0),
+                total: totalRedownloads.get(app.id) ?? 0,
             },
-            devices: sumByField(countedRows, app.id, "download", "device"),
-            countries: sumByField(countedRows, app.id, "download", "country"),
+            devices: sumByField(allRows, app.id, "download", "device"),
+            countries: sumByField(allRows, app.id, "download", "country"),
             monthly: monthlyDownloadSeries(countedRows, app.id, today.slice(0, 7)),
-            updates: { total: sumByApp(countedRows, "update").get(app.id) ?? 0 },
+            updates: { total: totalUpdates.get(app.id) ?? 0 },
             activeDevices: activeDevicesByApp.get(app.id) ?? null,
         };
     });

@@ -81,6 +81,21 @@ export async function collectStats({ client, vendorNumber, today, lookupMetadata
         monthlyRows.push(...parseSalesReport(tsv));
     }
 
+    // Monthly reports expire after 12 months but yearly ones never do, so they
+    // are the only way back to an app's first year. Only completed years: the
+    // current one is already covered by the monthly and daily walks. Wrapped
+    // defensively — a quirk here must never cost us the whole run.
+    const yearlyRows = [];
+    const currentYear = Number(today.slice(0, 4));
+    for (let year = Number((oldestMonth ?? today).slice(0, 4)); year < currentYear; year++) {
+        try {
+            const tsv = await client.salesReport({ vendorNumber, frequency: "YEARLY", reportDate: String(year) });
+            if (tsv !== null && tsv !== REPORT_GONE) yearlyRows.push(...parseSalesReport(tsv));
+        } catch (error) {
+            console.warn(`yearly report unavailable for ${year}: ${error.message}`);
+        }
+    }
+
     const dailyRows = [];
     for (let i = 1; i <= DAILY_WINDOW_DAYS; i++) {
         const tsv = await client.salesReport({ vendorNumber, frequency: "DAILY", reportDate: daysAgo(today, i) });
@@ -105,6 +120,7 @@ export async function collectStats({ client, vendorNumber, today, lookupMetadata
         }),
         monthlyRows,
         dailyRows,
+        yearlyRows,
         today,
         activeDevicesByApp,
     });
