@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-25T14:34:37.374Z",
+  "lastUpdated": "2026-08-26T14:34:12.375Z",
   "totals": {
     "downloads": 232
   },
@@ -28,13 +28,9 @@
       "downloads": {
         "total": 194,
         "priorToSeries": 86,
-        "last7Days": 3,
+        "last7Days": 2,
         "last30Days": 17,
         "daily": [
-          {
-            "date": "2026-05-27",
-            "units": 0
-          },
           {
             "date": "2026-05-28",
             "units": 0
@@ -390,6 +386,10 @@
           {
             "date": "2026-08-24",
             "units": 1
+          },
+          {
+            "date": "2026-08-25",
+            "units": 0
           }
         ]
       },
@@ -487,13 +487,9 @@
       "downloads": {
         "total": 28,
         "priorToSeries": 0,
-        "last7Days": 2,
+        "last7Days": 1,
         "last30Days": 12,
         "daily": [
-          {
-            "date": "2026-05-27",
-            "units": 2
-          },
           {
             "date": "2026-05-28",
             "units": 1
@@ -849,6 +845,10 @@
           {
             "date": "2026-08-24",
             "units": 0
+          },
+          {
+            "date": "2026-08-25",
+            "units": 0
           }
         ]
       },
@@ -916,13 +916,9 @@
       "downloads": {
         "total": 10,
         "priorToSeries": 0,
-        "last7Days": 4,
+        "last7Days": 2,
         "last30Days": 6,
         "daily": [
-          {
-            "date": "2026-05-27",
-            "units": 0
-          },
           {
             "date": "2026-05-28",
             "units": 0
@@ -1278,6 +1274,10 @@
           {
             "date": "2026-08-24",
             "units": 1
+          },
+          {
+            "date": "2026-08-25",
+            "units": 0
           }
         ]
       },
