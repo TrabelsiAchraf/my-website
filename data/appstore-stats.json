@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-08-28T23:16:47.650Z",
+  "lastUpdated": "2026-08-29T17:26:36.648Z",
   "totals": {
-    "downloads": 235
+    "downloads": 238
   },
   "apps": [
     {
@@ -26,15 +26,11 @@
         "ratingCount": 0
       },
       "downloads": {
-        "total": 195,
+        "total": 196,
         "priorToSeries": 86,
-        "last7Days": 3,
+        "last7Days": 4,
         "last30Days": 16,
         "daily": [
-          {
-            "date": "2026-05-30",
-            "units": 1
-          },
           {
             "date": "2026-05-31",
             "units": 1
@@ -390,6 +386,10 @@
           {
             "date": "2026-08-27",
             "units": 0
+          },
+          {
+            "date": "2026-08-28",
+            "units": 1
           }
         ]
       },
@@ -397,7 +397,7 @@
         "total": 28
       },
       "devices": {
-        "iPhone": 170,
+        "iPhone": 171,
         "Desktop": 14,
         "iPad": 11
       },
@@ -405,7 +405,7 @@
         "US": 57,
         "GB": 47,
         "FR": 25,
-        "CA": 12,
+        "CA": 13,
         "AU": 8,
         "SA": 6,
         "BE": 6,
@@ -457,7 +457,7 @@
         },
         {
           "month": "2026-08",
-          "units": 15
+          "units": 16
         }
       ],
       "updates": {
@@ -469,31 +469,29 @@
       "id": "6768824373",
       "name": "Munajat — Dhikr & Dua",
       "bundleId": "com.tadevv.munajat",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9b/19/29/9b192967-9ef0-50cc-3597-5776cb919638/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a8/b4/57/a8b4576e-0dc8-ef57-9f3b-6e1773b72d47/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
       "meta": {
-        "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9b/19/29/9b192967-9ef0-50cc-3597-5776cb919638/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
+        "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a8/b4/57/a8b4576e-0dc8-ef57-9f3b-6e1773b72d47/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
         "releaseDate": "2026-05-26",
-        "version": "1.0.0",
-        "versionDate": "2026-05-26",
+        "version": "1.1.0",
+        "versionDate": "2026-08-28",
         "genre": "Lifestyle",
         "languages": [
-          "EN"
+          "AR",
+          "EN",
+          "FR"
         ],
-        "minimumOsVersion": "18.4",
-        "sizeBytes": 5248000,
+        "minimumOsVersion": "17.0",
+        "sizeBytes": 5387264,
         "rating": 0,
         "ratingCount": 0
       },
       "downloads": {
-        "total": 29,
+        "total": 30,
         "priorToSeries": 0,
         "last7Days": 2,
         "last30Days": 8,
         "daily": [
-          {
-            "date": "2026-05-30",
-            "units": 0
-          },
           {
             "date": "2026-05-31",
             "units": 1
@@ -849,19 +847,23 @@
           {
             "date": "2026-08-27",
             "units": 0
+          },
+          {
+            "date": "2026-08-28",
+            "units": 1
           }
         ]
       },
       "redownloads": {
-        "total": 2
+        "total": 3
       },
       "devices": {
-        "iPhone": 25,
+        "iPhone": 26,
         "iPad": 2,
         "Desktop": 2
       },
       "countries": {
-        "SN": 10,
+        "SN": 11,
         "FR": 6,
         "US": 4,
         "CA": 1,
@@ -889,11 +891,11 @@
         },
         {
           "month": "2026-08",
-          "units": 7
+          "units": 8
         }
       ],
       "updates": {
-        "total": 0
+        "total": 7
       },
       "activeDevices": null
     },
@@ -915,15 +917,11 @@
         "ratingCount": 0
       },
       "downloads": {
-        "total": 11,
+        "total": 12,
         "priorToSeries": 0,
-        "last7Days": 2,
-        "last30Days": 7,
+        "last7Days": 3,
+        "last30Days": 8,
         "daily": [
-          {
-            "date": "2026-05-30",
-            "units": 0
-          },
           {
             "date": "2026-05-31",
             "units": 0
@@ -1279,6 +1277,10 @@
           {
             "date": "2026-08-27",
             "units": 0
+          },
+          {
+            "date": "2026-08-28",
+            "units": 1
           }
         ]
       },
@@ -1286,13 +1288,14 @@
         "total": 0
       },
       "devices": {
-        "Desktop": 11
+        "Desktop": 12
       },
       "countries": {
         "TN": 2,
         "US": 2,
         "DE": 1,
         "FR": 1,
+        "UZ": 1,
         "AU": 1,
         "DK": 1,
         "BE": 1,
@@ -1318,7 +1321,7 @@
         },
         {
           "month": "2026-08",
-          "units": 7
+          "units": 8
         }
       ],
       "updates": {
