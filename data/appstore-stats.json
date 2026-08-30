@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-29T17:26:36.648Z",
+  "lastUpdated": "2026-08-30T17:50:15.339Z",
   "totals": {
     "downloads": 238
   },
@@ -28,13 +28,9 @@
       "downloads": {
         "total": 196,
         "priorToSeries": 86,
-        "last7Days": 4,
+        "last7Days": 3,
         "last30Days": 16,
         "daily": [
-          {
-            "date": "2026-05-31",
-            "units": 1
-          },
           {
             "date": "2026-06-01",
             "units": 2
@@ -390,6 +386,10 @@
           {
             "date": "2026-08-28",
             "units": 1
+          },
+          {
+            "date": "2026-08-29",
+            "units": 0
           }
         ]
       },
@@ -492,10 +492,6 @@
         "last7Days": 2,
         "last30Days": 8,
         "daily": [
-          {
-            "date": "2026-05-31",
-            "units": 1
-          },
           {
             "date": "2026-06-01",
             "units": 2
@@ -851,6 +847,10 @@
           {
             "date": "2026-08-28",
             "units": 1
+          },
+          {
+            "date": "2026-08-29",
+            "units": 0
           }
         ]
       },
@@ -895,7 +895,7 @@
         }
       ],
       "updates": {
-        "total": 7
+        "total": 13
       },
       "activeDevices": null
     },
@@ -922,10 +922,6 @@
         "last7Days": 3,
         "last30Days": 8,
         "daily": [
-          {
-            "date": "2026-05-31",
-            "units": 0
-          },
           {
             "date": "2026-06-01",
             "units": 0
@@ -1281,6 +1277,10 @@
           {
             "date": "2026-08-28",
             "units": 1
+          },
+          {
+            "date": "2026-08-29",
+            "units": 0
           }
         ]
       },
