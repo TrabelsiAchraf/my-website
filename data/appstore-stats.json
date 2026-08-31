@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-08-30T17:50:15.339Z",
+  "lastUpdated": "2026-08-31T19:44:31.646Z",
   "totals": {
-    "downloads": 238
+    "downloads": 239
   },
   "apps": [
     {
@@ -26,15 +26,11 @@
         "ratingCount": 0
       },
       "downloads": {
-        "total": 196,
+        "total": 197,
         "priorToSeries": 86,
-        "last7Days": 3,
-        "last30Days": 16,
+        "last7Days": 4,
+        "last30Days": 17,
         "daily": [
-          {
-            "date": "2026-06-01",
-            "units": 2
-          },
           {
             "date": "2026-06-02",
             "units": 0
@@ -390,6 +386,10 @@
           {
             "date": "2026-08-29",
             "units": 0
+          },
+          {
+            "date": "2026-08-30",
+            "units": 1
           }
         ]
       },
@@ -397,12 +397,12 @@
         "total": 28
       },
       "devices": {
-        "iPhone": 171,
+        "iPhone": 172,
         "Desktop": 14,
         "iPad": 11
       },
       "countries": {
-        "US": 57,
+        "US": 58,
         "GB": 47,
         "FR": 25,
         "CA": 13,
@@ -457,7 +457,7 @@
         },
         {
           "month": "2026-08",
-          "units": 16
+          "units": 17
         }
       ],
       "updates": {
@@ -492,10 +492,6 @@
         "last7Days": 2,
         "last30Days": 8,
         "daily": [
-          {
-            "date": "2026-06-01",
-            "units": 2
-          },
           {
             "date": "2026-06-02",
             "units": 0
@@ -851,6 +847,10 @@
           {
             "date": "2026-08-29",
             "units": 0
+          },
+          {
+            "date": "2026-08-30",
+            "units": 0
           }
         ]
       },
@@ -922,10 +922,6 @@
         "last7Days": 3,
         "last30Days": 8,
         "daily": [
-          {
-            "date": "2026-06-01",
-            "units": 0
-          },
           {
             "date": "2026-06-02",
             "units": 0
@@ -1280,6 +1276,10 @@
           },
           {
             "date": "2026-08-29",
+            "units": 0
+          },
+          {
+            "date": "2026-08-30",
             "units": 0
           }
         ]
