@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-09-03T17:22:49.850Z",
+  "lastUpdated": "2026-09-04T17:15:42.084Z",
   "totals": {
-    "downloads": 248
+    "downloads": 249
   },
   "apps": [
     {
       "id": "6740041173",
-      "name": "Salt Scan - Check Salt Levels",
+      "name": "Salt Scan: Sodium Tracker",
       "bundleId": "com.tadevv.SaltScan",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/76/c1/fd/76c1fd5e-932d-7dc4-904a-fe8384164d64/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
       "meta": {
@@ -31,10 +31,6 @@
         "last7Days": 5,
         "last30Days": 16,
         "daily": [
-          {
-            "date": "2026-06-05",
-            "units": 0
-          },
           {
             "date": "2026-06-06",
             "units": 0
@@ -390,6 +386,10 @@
           {
             "date": "2026-09-02",
             "units": 1
+          },
+          {
+            "date": "2026-09-03",
+            "units": 0
           }
         ]
       },
@@ -473,12 +473,12 @@
       "id": "6768824373",
       "name": "Munajat — Dhikr & Dua",
       "bundleId": "com.tadevv.munajat",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a8/b4/57/a8b4576e-0dc8-ef57-9f3b-6e1773b72d47/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bd/ac/f3/bdacf37d-002c-4964-95d3-90ee68b98d5e/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
       "meta": {
-        "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a8/b4/57/a8b4576e-0dc8-ef57-9f3b-6e1773b72d47/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
+        "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bd/ac/f3/bdacf37d-002c-4964-95d3-90ee68b98d5e/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
         "releaseDate": "2026-05-26",
-        "version": "1.1.0",
-        "versionDate": "2026-08-28",
+        "version": "1.2.0",
+        "versionDate": "2026-09-03",
         "genre": "Lifestyle",
         "languages": [
           "AR",
@@ -486,20 +486,16 @@
           "FR"
         ],
         "minimumOsVersion": "17.0",
-        "sizeBytes": 5387264,
+        "sizeBytes": 5616640,
         "rating": 0,
         "ratingCount": 0
       },
       "downloads": {
-        "total": 32,
+        "total": 33,
         "priorToSeries": 0,
-        "last7Days": 3,
+        "last7Days": 4,
         "last30Days": 9,
         "daily": [
-          {
-            "date": "2026-06-05",
-            "units": 0
-          },
           {
             "date": "2026-06-06",
             "units": 0
@@ -855,6 +851,10 @@
           {
             "date": "2026-09-02",
             "units": 0
+          },
+          {
+            "date": "2026-09-03",
+            "units": 1
           }
         ]
       },
@@ -862,14 +862,14 @@
         "total": 3
       },
       "devices": {
-        "iPhone": 28,
+        "iPhone": 29,
         "iPad": 2,
         "Desktop": 2
       },
       "countries": {
         "SN": 11,
         "FR": 6,
-        "US": 4,
+        "US": 5,
         "CI": 2,
         "MY": 1,
         "BJ": 1,
@@ -900,11 +900,11 @@
         },
         {
           "month": "2026-09",
-          "units": 1
+          "units": 2
         }
       ],
       "updates": {
-        "total": 14
+        "total": 16
       },
       "activeDevices": null
     },
@@ -931,10 +931,6 @@
         "last7Days": 5,
         "last30Days": 12,
         "daily": [
-          {
-            "date": "2026-06-05",
-            "units": 0
-          },
           {
             "date": "2026-06-06",
             "units": 0
@@ -1290,6 +1286,10 @@
           {
             "date": "2026-09-02",
             "units": 2
+          },
+          {
+            "date": "2026-09-03",
+            "units": 0
           }
         ]
       },
