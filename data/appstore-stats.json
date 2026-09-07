@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-09-06T16:33:55.513Z",
+  "lastUpdated": "2026-09-07T18:28:32.232Z",
   "totals": {
-    "downloads": 257
+    "downloads": 258
   },
   "apps": [
     {
@@ -28,13 +28,9 @@
       "downloads": {
         "total": 202,
         "priorToSeries": 86,
-        "last7Days": 6,
-        "last30Days": 17,
+        "last7Days": 5,
+        "last30Days": 16,
         "daily": [
-          {
-            "date": "2026-06-08",
-            "units": 0
-          },
           {
             "date": "2026-06-09",
             "units": 2
@@ -390,6 +386,10 @@
           {
             "date": "2026-09-05",
             "units": 1
+          },
+          {
+            "date": "2026-09-06",
+            "units": 0
           }
         ]
       },
@@ -465,7 +465,7 @@
         }
       ],
       "updates": {
-        "total": 148
+        "total": 156
       },
       "activeDevices": null
     },
@@ -496,10 +496,6 @@
         "last7Days": 7,
         "last30Days": 12,
         "daily": [
-          {
-            "date": "2026-06-08",
-            "units": 0
-          },
           {
             "date": "2026-06-09",
             "units": 0
@@ -855,6 +851,10 @@
           {
             "date": "2026-09-05",
             "units": 2
+          },
+          {
+            "date": "2026-09-06",
+            "units": 0
           }
         ]
       },
@@ -911,7 +911,7 @@
     },
     {
       "id": "6761739430",
-      "name": "MirrorKit",
+      "name": "MirrorKit – iPhone on Mac",
       "bundleId": "com.achraftrabelsi.MirrorKit",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/15/ae/50/15ae507a-a4cb-7852-e60a-db6b9fada1eb/AppIcon-0-0-85-220-0-5-0-2x-sRGB.png/100x100bb.png",
       "meta": {
@@ -927,15 +927,11 @@
         "ratingCount": 0
       },
       "downloads": {
-        "total": 18,
+        "total": 19,
         "priorToSeries": 0,
-        "last7Days": 6,
-        "last30Days": 14,
+        "last7Days": 7,
+        "last30Days": 15,
         "daily": [
-          {
-            "date": "2026-06-08",
-            "units": -1
-          },
           {
             "date": "2026-06-09",
             "units": 0
@@ -1291,6 +1287,10 @@
           {
             "date": "2026-09-05",
             "units": 1
+          },
+          {
+            "date": "2026-09-06",
+            "units": 1
           }
         ]
       },
@@ -1298,7 +1298,7 @@
         "total": 0
       },
       "devices": {
-        "Desktop": 18
+        "Desktop": 19
       },
       "countries": {
         "US": 3,
@@ -1313,6 +1313,7 @@
         "ES": 1,
         "BE": 1,
         "FR": 1,
+        "CN": 1,
         "PL": 1,
         "EC": 1
       },
@@ -1339,7 +1340,7 @@
         },
         {
           "month": "2026-09",
-          "units": 5
+          "units": 6
         }
       ],
       "updates": {
