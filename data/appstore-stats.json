@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-09-18T17:21:41.229Z",
+  "lastUpdated": "2026-09-19T16:53:45.420Z",
   "totals": {
-    "downloads": 339
+    "downloads": 342
   },
   "apps": [
     {
@@ -26,15 +26,11 @@
         "ratingCount": 0
       },
       "downloads": {
-        "total": 238,
+        "total": 240,
         "priorToSeries": 86,
-        "last7Days": 24,
-        "last30Days": 46,
+        "last7Days": 20,
+        "last30Days": 48,
         "daily": [
-          {
-            "date": "2026-06-20",
-            "units": 2
-          },
           {
             "date": "2026-06-21",
             "units": 0
@@ -390,6 +386,10 @@
           {
             "date": "2026-09-17",
             "units": 3
+          },
+          {
+            "date": "2026-09-18",
+            "units": 2
           }
         ]
       },
@@ -397,12 +397,12 @@
         "total": 31
       },
       "devices": {
-        "iPhone": 213,
+        "iPhone": 215,
         "Desktop": 14,
         "iPad": 11
       },
       "countries": {
-        "US": 75,
+        "US": 76,
         "GB": 58,
         "FR": 27,
         "AU": 14,
@@ -410,8 +410,8 @@
         "SA": 6,
         "BE": 6,
         "IN": 6,
+        "CH": 4,
         "MA": 4,
-        "CH": 3,
         "IE": 3,
         "JP": 2,
         "NO": 2,
@@ -462,7 +462,7 @@
         },
         {
           "month": "2026-09",
-          "units": 39
+          "units": 41
         }
       ],
       "updates": {
@@ -474,12 +474,12 @@
       "id": "6768824373",
       "name": "Munajat — Dhikr & Dua",
       "bundleId": "com.tadevv.munajat",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bd/ac/f3/bdacf37d-002c-4964-95d3-90ee68b98d5e/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/67/d1/a3/67d1a39f-34e5-7f49-cea2-4b8b6a0d6313/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
       "meta": {
-        "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bd/ac/f3/bdacf37d-002c-4964-95d3-90ee68b98d5e/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
+        "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/67/d1/a3/67d1a39f-34e5-7f49-cea2-4b8b6a0d6313/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg",
         "releaseDate": "2026-05-26",
-        "version": "1.2.0",
-        "versionDate": "2026-09-03",
+        "version": "1.3.0",
+        "versionDate": "2026-09-18",
         "genre": "Lifestyle",
         "languages": [
           "AR",
@@ -487,20 +487,16 @@
           "FR"
         ],
         "minimumOsVersion": "17.0",
-        "sizeBytes": 5616640,
+        "sizeBytes": 5772288,
         "rating": 0,
         "ratingCount": 0
       },
       "downloads": {
-        "total": 63,
+        "total": 64,
         "priorToSeries": 0,
-        "last7Days": 16,
-        "last30Days": 36,
+        "last7Days": 15,
+        "last30Days": 37,
         "daily": [
-          {
-            "date": "2026-06-20",
-            "units": 0
-          },
           {
             "date": "2026-06-21",
             "units": 0
@@ -856,20 +852,24 @@
           {
             "date": "2026-09-17",
             "units": 4
+          },
+          {
+            "date": "2026-09-18",
+            "units": 1
           }
         ]
       },
       "redownloads": {
-        "total": 3
+        "total": 4
       },
       "devices": {
-        "iPhone": 56,
+        "iPhone": 57,
         "iPad": 5,
         "Desktop": 2
       },
       "countries": {
         "SN": 18,
-        "FR": 16,
+        "FR": 17,
         "US": 9,
         "CI": 3,
         "MY": 2,
@@ -906,11 +906,11 @@
         },
         {
           "month": "2026-09",
-          "units": 32
+          "units": 33
         }
       ],
       "updates": {
-        "total": 30
+        "total": 35
       },
       "activeDevices": null
     },
@@ -940,10 +940,6 @@
         "last7Days": 14,
         "last30Days": 30,
         "daily": [
-          {
-            "date": "2026-06-20",
-            "units": 0
-          },
           {
             "date": "2026-06-21",
             "units": 0
@@ -1299,6 +1295,10 @@
           {
             "date": "2026-09-17",
             "units": 1
+          },
+          {
+            "date": "2026-09-18",
+            "units": 0
           }
         ]
       },
